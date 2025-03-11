@@ -1,2 +1,2 @@
 # TeamAgroupProject
-Team project For OOP Team A
+Our project idea is a auto parts company that aims to supply numerous garages and homes with our numerous locations spread across the countries. Memebers of the public can sign up and enter their relevant information and gain access to our range of products. Users can  easily access any useful information needed such as the stock quantites for desired products and which stores hold such stock. Our services also include a speedy and reliable delivery process available to all.
