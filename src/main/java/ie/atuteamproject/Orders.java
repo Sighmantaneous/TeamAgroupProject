@@ -49,6 +49,11 @@ public class Orders
         this.dateShipped = dateShipped;
     }
 
-    //test
+    public void setDateShipped(String dateShipped2)
+    {
+        this.dateShipped = dateShipped;
+    }
+
+
 }
 
