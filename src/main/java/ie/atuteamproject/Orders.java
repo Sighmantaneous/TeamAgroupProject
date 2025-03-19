@@ -49,9 +49,5 @@ public class Orders
         this.dateShipped = dateShipped;
     }
 
-    //test3
-    //test
-    //test2
-
 }
 
