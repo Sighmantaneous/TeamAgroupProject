@@ -3,36 +3,73 @@ CREATE DATABASE IF NOT EXISTS customerdatabase;
 USE customerdatabase;
 
 CREATE TABLE IF NOT EXISTS Product (
-    productID INT(11) NOT NULL AUTO_INCREMENT,
+    ID INT(11) NOT NULL AUTO_INCREMENT,
     productName VARCHAR(50) NOT NULL,
-    productDescription VARCHAR(50) NOT NULL,
-    productPrice INT(11) NOT NULL,
+    productDescription TEXT,
+    productPrice DECIMAL(10,2) NOT NULL,
+    productStock INT(11) NOT NULL,
+    brandID INT(11),
+    categoryID INT(11) NOT NULL,
     warehouseID INT(11) NOT NULL,
-    productBrandID INT(11) NOT NULL,
-    PRIMARY KEY (productID),
-    FOREIGN KEY (warehouseID) REFERENCES Address(productWarehouseID),
-
+    PRIMARY KEY (ID),
+    FOREIGN KEY (brandID) REFERENCES Brand(ID) ON DELETE CASCADE,
+    FOREIGN KEY (warehouseID) REFERENCES Warehouse(ID) ON DELETE CASCADE,
+    FOREIGN KEY (categoryID) REFERENCES Category(ID) ON DELETE CASCADE
     );
 
 CREATE TABLE IF NOT EXISTS Orders (
-
-
+    ID INT(11) NOT NULL AUTO_INCREMENT,
+    orderDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    orderCost DECIMAL(10,2) NOT NULL,
+    customerID INT(11) NOT NULL,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (customerID) REFERENCES Customer(ID) ON DELETE CASCADE
     );
 
 CREATE TABLE IF NOT EXISTS Customer (
-
-
+    ID INT(11) NOT NULL AUTO_INCREMENT,
+    customerName VARCHAR(50) NOT NULL,
+    customerLastName VARCHAR(50) NOT NULL,
+    customerEmail VARCHAR(50) NOT NULL UNIQUE,
+    customerPhone VARCHAR(50) NOT NULL UNIQUE,
+    PRIMARY KEY (ID)
     );
 
 CREATE TABLE IF NOT EXISTS Address (
-    customerAddressID INT(11) NOT NULL,
-    productWarehouseID INT(11) NOT NULL,
+    addressID INT(11) NOT NULL AUTO_INCREMENT,
+    customerID INT(11) NOT NULL,
+    country VARCHAR(50) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    street VARCHAR(50) NOT NULL,
+    eircode VARCHAR(50) NOT NULL,
+    PRIMARY KEY (addressID),
+    FOREIGN KEY (customerID) REFERENCES Customer(ID) ON DELETE CASCADE
     );
 
-CREATE TABLE IF NOT EXISTS Brands (
-
+CREATE TABLE IF NOT EXISTS Warehouse (
+    ID INT(11) NOT NULL AUTO_INCREMENT,
+    warehouseAddress VARCHAR(150) NOT NULL,
+    PRIMARY KEY (ID)
     );
 
-CREATE TABLE IF NOT EXISTS Staff (
+CREATE TABLE IF NOT EXISTS Brand (
+    ID INT(11) NOT NULL AUTO_INCREMENT,
+    brandName VARCHAR(50) NOT NULL,
+    PRIMARY KEY (ID)
+    );
 
+CREATE TABLE IF NOT EXISTS Category (
+    ID INT(11) NOT NULL AUTO_INCREMENT,
+    categoryName VARCHAR(50) NOT NULL,
+    PRIMARY KEY (ID)
+    );
+
+CREATE TABLE IF NOT EXISTS Payments (
+    ID INT(11) NOT NULL AUTO_INCREMENT,
+    orderID INT(11) NOT NULL,
+    paymentAmount DECIMAL(10,2) NOT NULL,
+    paymentDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    paymentMethod VARCHAR(50) NOT NULL DEFAULT 'Credit Card',
+    PRIMARY KEY (ID),
+    FOREIGN KEY (orderID) REFERENCES Orders(ID) ON DELETE CASCADE
     );
