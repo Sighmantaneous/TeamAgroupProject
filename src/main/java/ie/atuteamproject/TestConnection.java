@@ -1,4 +1,4 @@
-
+package ie.atuteamproject;
 import java.sql.*;
 
 public class TestConnection {

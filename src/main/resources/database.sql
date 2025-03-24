@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS customerdatabase;
+CREATE DATABASE IF NOT EXISTS database;
 
-USE customerdatabase;
+USE database;
 
 CREATE TABLE IF NOT EXISTS Product (
     ID INT(11) NOT NULL AUTO_INCREMENT,
