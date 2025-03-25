@@ -1,4 +1,3 @@
-package ie.atuteamproject;
 import java.sql.*;
 
 public class TestConnection {
@@ -12,7 +11,7 @@ public class TestConnection {
             // ideally we would use a properties file instead of hardcoding values
             Class.forName("com.mysql.cj.jdbc.Driver");
             // Create a connection to the database, hardcoding values for now.
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampleproducts", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/groupprojectdatabase", "root", "password");
             System.out.println("Connection made to connection pool");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

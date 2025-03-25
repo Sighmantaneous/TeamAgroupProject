@@ -8,11 +8,11 @@ CREATE TABLE IF NOT EXISTS Product (
     productDescription TEXT,
     productPrice DECIMAL(10,2) NOT NULL,
     productStock INT(11) NOT NULL,
-    brandID INT(11),
+    /*brandID INT(11),*/
     categoryID INT(11) NOT NULL,
     warehouseID INT(11) NOT NULL,
     PRIMARY KEY (ID),
-    FOREIGN KEY (brandID) REFERENCES Brand(ID) ON DELETE CASCADE,
+    /*FOREIGN KEY (brandID) REFERENCES Brand(ID) ON DELETE CASCADE,*/
     FOREIGN KEY (warehouseID) REFERENCES Warehouse(ID) ON DELETE CASCADE,
     FOREIGN KEY (categoryID) REFERENCES Category(ID) ON DELETE CASCADE
     );
@@ -53,11 +53,11 @@ CREATE TABLE IF NOT EXISTS Warehouse (
     PRIMARY KEY (ID)
     );
 
-CREATE TABLE IF NOT EXISTS Brand (
+/*CREATE TABLE IF NOT EXISTS Brand (
     ID INT(11) NOT NULL AUTO_INCREMENT,
     brandName VARCHAR(50) NOT NULL,
     PRIMARY KEY (ID)
-    );
+    );*/
 
 CREATE TABLE IF NOT EXISTS Category (
     ID INT(11) NOT NULL AUTO_INCREMENT,
