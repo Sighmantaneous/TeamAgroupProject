@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS database;
+CREATE DATABASE IF NOT EXISTS groupProjectDatabase;
 
-USE database;
+USE groupProjectDatabase;
 
 CREATE TABLE IF NOT EXISTS Product (
     ID INT(11) NOT NULL AUTO_INCREMENT,
