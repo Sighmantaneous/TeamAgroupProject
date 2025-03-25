@@ -2,7 +2,6 @@ CREATE DATABASE IF NOT EXISTS groupProjectDatabase;
 
 USE groupProjectDatabase;
 
-
 CREATE TABLE IF NOT EXISTS Brand (
     ID INT(11) NOT NULL AUTO_INCREMENT,
     brandName VARCHAR(50) NOT NULL,
