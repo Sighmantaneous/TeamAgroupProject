@@ -25,14 +25,14 @@ public class testInsert {
             throw new RuntimeException(e);
         }
 
-        String sql2 = "Insert into Brand values(?,?)";
+     /*   String sql2 = "Insert into Brand values(?,?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql2)) {
             stmt.setInt(1, 1);
             stmt.setString(2, "Nissan");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+*/
     }
 
     @Test
