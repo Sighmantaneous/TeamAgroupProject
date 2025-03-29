@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Scanner;
 
 public class InsertData {
@@ -235,6 +232,44 @@ public class InsertData {
 
 
         //create orders receive method
+        public static void InsertOrders(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Order ID: ");
+        int OrderID = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Order Cost");
+        int OrderCost = scanner.nextInt();
+        System.out.println("Enter Customer ID");
+        int CustomerID = scanner.nextInt();
+
+        CreateOrders(OrderID,OrderCost,CustomerID);
+        }
+
+        public static void CreateOrders(int OrderID, int OrderCost, int CustomerID) {
+        Connection connection;
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+                connection.setAutoCommit(false);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            String Orders = "Insert into Order values(?,?,?,?)";
+
+            try (PreparedStatement stmt = connection.prepareStatement(Orders))
+            {
+                stmt.setInt(1,OrderID);
+                stmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+                stmt.setInt(3,OrderCost);
+                stmt.setInt(4,CustomerID);
+
+                stmt.executeUpdate();
+            }
+            catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
         //create orders create method
 
         //create payments receive method
