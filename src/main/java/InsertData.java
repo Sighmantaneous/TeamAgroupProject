@@ -33,7 +33,6 @@ public class InsertData {
                 int TableSelect = scanner.nextInt();
                 scanner.nextLine();
 
-
                 switch (TableSelect) {
 
                     case 1:
@@ -45,9 +44,11 @@ public class InsertData {
                         break;
                     case 3:
                         //call category creator
+                        InsertCategory();
                         break;
                     case 4:
                         //call Customer creator
+                        InsertCustomer();
                         break;
                     case 5:
                         //call Order creator
@@ -64,6 +65,7 @@ public class InsertData {
                         break;
                     case 9:
                         exit = false;
+                        System.out.println("Goodbye!");
                         break;
                     default:
                         System.out.println("Invalid choice. Try again.");
@@ -88,10 +90,7 @@ public class InsertData {
             String BrandName = scanner.nextLine();
 
             CreateBrand(BrandID, BrandName);
-
-
         }
-
         public static void CreateBrand(int BrandID, String BrandName) {
 
             Connection connection;
@@ -105,12 +104,88 @@ public class InsertData {
             try (PreparedStatement stmt = connection.prepareStatement(sql2)) {
                 stmt.setInt(1, BrandID);
                 stmt.setString(2, BrandName);
+                stmt.executeUpdate();
                 System.out.println("Inserted ID=" + BrandID + " Name="+ BrandName+ " into Brand.");
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-           // System.out.println("Inserted " + BrandID + " into Brand.");
+        }
 
+        public static void InsertCategory() {
+
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("Enter Category ID: ");
+            int categoryID = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.println("Enter Category Name: ");
+            String CategoryName = scanner.nextLine();
+
+            CreateCategory(categoryID,CategoryName);
+        }
+        public static void CreateCategory(int CategoryID, String CategoryName) {
+
+        Connection connection;
+
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            String Category = "Insert into Category values(?,?)";
+            try (PreparedStatement stmt = connection.prepareStatement(Category)) {
+                stmt.setInt(1, CategoryID);
+                stmt.setString(2, CategoryName);
+                stmt.executeUpdate();
+                System.out.println("Inserted ID=" + CategoryID + " Name="+ CategoryName+ " into Brand.");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
+        public static void InsertCustomer(){
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Customer ID: ");
+        int CustomerID = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter Customer First Name: ");
+        String FirstName = scanner.nextLine();
+        System.out.println("Enter Customer Last Name: ");
+        String LastName = scanner.nextLine();
+        System.out.println("Enter Customer Email: ");
+        String Email = scanner.nextLine();
+        System.out.println("Enter Customer Phone Number: ");
+        String PhoneNumber = scanner.nextLine();
+
+            CreateCustomer(CustomerID, FirstName, LastName, Email,PhoneNumber);
+        }
+
+        public static void CreateCustomer(int CustomerID, String FirstName, String LastName, String Email, String PhoneNumber) {
+
+            Connection connection;
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            String sqlCustomer = "Insert into Customer values(?,?,?,?,?)";
+
+            try (PreparedStatement stmt = connection.prepareStatement(sqlCustomer)){
+                stmt.setInt(1, CustomerID);
+                stmt.setString(2, FirstName);
+                stmt.setString(3, LastName);
+                stmt.setString(4, Email);
+                stmt.setString(5, PhoneNumber);
+                stmt.executeUpdate();
+                System.out.println("All items entered into Customer.");
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
 
 
         }
