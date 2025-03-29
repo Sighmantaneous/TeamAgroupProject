@@ -254,7 +254,7 @@ public class testInsertData {
         String OrdersTest = "INSERT INTO Orders VALUES (?,?,?,?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(OrdersTest)) {
-            stmt.setInt(1, 10);
+            stmt.setInt(1, 20);
             stmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
             stmt.setInt(3, 50);
             stmt.setInt(4, 3);
@@ -283,13 +283,13 @@ public class testInsertData {
 
         try (PreparedStatement stmt = connection.prepareStatement(OrdersTest);
              PreparedStatement stmtFailCase = connection.prepareStatement(OrdersTest)) {
-            stmt.setInt(1, 10);
+            stmt.setInt(1, 20);
             stmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
             stmt.setInt(3, 50);
             stmt.setInt(4, 3);
             stmt.executeUpdate();
 
-            stmtFailCase.setInt(1, 10);
+            stmtFailCase.setInt(1, 20);
             stmtFailCase.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
             stmtFailCase.setInt(3, 25);
             stmtFailCase.setInt(4, 3);
@@ -384,7 +384,7 @@ void TestInsertWarehouseSuccess() {
 
     try(PreparedStatement stmt = connection.prepareStatement(WareHouseTest)){
 
-        stmt.setInt(1, 10);
+        stmt.setInt(1, 20);
         stmt.setString(2, "TestWarehouse");
         stmt.executeUpdate();
 
@@ -407,11 +407,11 @@ void TestInsertWarehouseSuccess() {
     try (PreparedStatement stmt = connection.prepareStatement(WareHouseTest);
          PreparedStatement stmtFailCase = connection.prepareStatement(WareHouseTest)) {
 
-        stmt.setInt(1, 10);
+        stmt.setInt(1, 20);
         stmt.setString(2, "TestWarehouseFail");
         stmt.executeUpdate();
 
-        stmtFailCase.setInt(1, 10);
+        stmtFailCase.setInt(1, 20);
         stmtFailCase.setString(2, "TestFailWarehouse");
 
 
@@ -443,17 +443,57 @@ void TestInsertProductSuccess() {
         stmt.setInt(4, 50);
         stmt.setInt(5, 3);
         stmt.setInt(6, 3);
+        stmt.setInt(7, 3);
+        stmt.setInt(8, 3);
+        stmt.executeUpdate();
 
     }catch (SQLException e){
         throw new RuntimeException(e);
     }
     }
 
+@Test
+void TestInsertProductFailure() {
+        Connection connection = null;
+    try {
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+        connection.setAutoCommit(false);
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+    String ProductTest = "INSERT INTO Product VALUES (?,?,?,?,?,?,?,?)";
+    try(PreparedStatement stmt = connection.prepareStatement(ProductTest);
+    PreparedStatement stmtFailCase = connection.prepareStatement(ProductTest)) {
 
+        stmt.setInt(1, 10);
+        stmt.setString(2, "TestName");
+        stmt.setString(3, "TestDescription");
+        stmt.setInt(4, 50);
+        stmt.setInt(5, 3);
+        stmt.setInt(6, 3);
+        stmt.setInt(7, 3);
+        stmt.setInt(8, 3);
+        stmt.executeUpdate();
+
+        stmtFailCase.setInt(1, 10);
+        stmtFailCase.setString(2, "TestFailName");
+        stmtFailCase.setString(3, "TestFailDescription");
+        stmtFailCase.setInt(4, 50);
+        stmtFailCase.setInt(5, 3);
+        stmtFailCase.setInt(6, 3);
+        stmtFailCase.setInt(7, 3);
+        stmtFailCase.setInt(8, 3);
+
+        assertThrows(SQLIntegrityConstraintViolationException.class, stmtFailCase::executeUpdate);
+
+    }catch (SQLException e){
+        throw new RuntimeException(e);
+    }
+}
 
 
 }
-    //TestProduct create fail
+
 
 
 

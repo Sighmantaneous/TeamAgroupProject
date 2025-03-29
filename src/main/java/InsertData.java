@@ -52,7 +52,7 @@ public class InsertData {
                         InsertPayments();
                         break;
                     case 7:
-                        //call product creator
+                        InsertProduct();
                         break;
                     case 8:
                         InsertWareHouse();
@@ -312,7 +312,7 @@ public class InsertData {
 
     }
 
-    public static void InsertWareHouse(){
+    public static void InsertWareHouse() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Warehouse ID: ");
         int WarehouseID = scanner.nextInt();
@@ -320,7 +320,7 @@ public class InsertData {
         System.out.println("Warehouse Address");
         String WarehouseAddress = scanner.nextLine();
 
-        CreateWareHouse(WarehouseID,WarehouseAddress);
+        CreateWareHouse(WarehouseID, WarehouseAddress);
 
 
     }
@@ -334,26 +334,77 @@ public class InsertData {
             throw new RuntimeException(e);
         }
 
-        String Warehouses = "Insert INTO Warehouse values(?,?,?)";
+        String Warehouses = "Insert INTO Warehouse values(?,?)";
 
-        try(PreparedStatement stmt = connection.prepareStatement(Warehouses)){
+        try (PreparedStatement stmt = connection.prepareStatement(Warehouses)) {
             stmt.setInt(1, WarehouseID);
             stmt.setString(2, WarehouseAddress);
             stmt.executeUpdate();
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
 
         }
 
     }
+
+    public static void InsertProduct() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Product ID: ");
+        int ProductID = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter Product Name: ");
+        String ProductName = scanner.nextLine();
+        System.out.println("Enter Product Description: ");
+        String ProductDescription = scanner.nextLine();
+        System.out.println("Enter Product Price: ");
+        int ProductPrice = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter Product Quantity: ");
+        int ProductQuantity = scanner.nextInt();
+        System.out.println("Enter Product BrandID: ");
+        int ProductBrandID = scanner.nextInt();
+        System.out.println("Enter Product CategoryID: ");
+        int ProductCategoryID = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter WarehouseID ");
+        int WarehouseID = scanner.nextInt();
+        scanner.nextLine();
+
+        CreateProduct(ProductID, ProductName, ProductDescription, ProductPrice, ProductQuantity, ProductBrandID, ProductCategoryID, WarehouseID);
+
     }
 
-        //create product receive method
-        //create product create method
+    public static void CreateProduct(int ProductID, String ProductName, String ProductDescription, int ProductPrice, int ProductQuantity, int ProductBrandID, int ProductCategoryID, int WarehouseID) {
+        Connection connection;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        String Products = "INSERT INTO Product VALUES (?,?,?,?,?,?,?,?)";
+        try (PreparedStatement stmt = connection.prepareStatement(Products);) {
+
+            stmt.setInt(1,ProductID );
+            stmt.setString(2, ProductName);
+            stmt.setString(3, ProductDescription);
+            stmt.setInt(4, ProductPrice);
+            stmt.setInt(5, ProductQuantity );
+            stmt.setInt(6, ProductBrandID );
+            stmt.setInt(7, ProductCategoryID);
+            stmt.setInt(8,WarehouseID );
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
 
 
+    }
+}
 
 
 
