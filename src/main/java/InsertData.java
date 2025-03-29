@@ -189,6 +189,24 @@ public class InsertData {
 
 
         }
+
+        //create Address receive method
+        //create Address create method
+
+        //create orders receive method
+        //create orders create method
+
+        //create payments receive method
+        //create payments create method
+
+        //create product receive method
+        //create procuct create method
+
+        //create warehouse receive method
+        //create warehouse create method
+
+
+
     }
 
 

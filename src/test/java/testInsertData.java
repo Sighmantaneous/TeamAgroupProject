@@ -58,16 +58,10 @@ public class testInsertData {
                     "Inserting a duplicate ID should throw a SQLIntegrityConstraintViolationException");
 
 
-
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
-
-
     @Test
     void TestInsertCategorySuccess() {
         Connection connection = null;
@@ -109,9 +103,6 @@ public class testInsertData {
             stmtFailCase.setString(2, "TestFailWindow");
 
             assertThrows(SQLIntegrityConstraintViolationException.class, stmtFailCase::executeUpdate);
-
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -180,6 +171,21 @@ public class testInsertData {
                 throw new RuntimeException(e);
             }
         }
+
+        //TestAddress create pass
+        //TestAddress create fail
+
+        //TestOrders create pass
+        //TestOrders create fail
+
+        //TestPayments create pass
+        //TestPayments create fail
+
+        //TestProduct create pass
+        //TestProduct create fail
+
+        //TestWareHouse create pass
+        //TestWareHouse create fail
     }
 
 
