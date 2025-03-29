@@ -294,14 +294,15 @@ public class testInsertData {
             stmtFailCase.setInt(3, 25);
             stmtFailCase.setInt(4, 3);
 
-            assertThrows(SQLIntegrityConstraintViolationException.class , stmtFailCase::executeUpdate);
+            assertThrows(SQLIntegrityConstraintViolationException.class, stmtFailCase::executeUpdate);
 
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-        //TestPayments create pass
+
+    //TestPayments create pass
     @Test
     void TestInsertPaymentsSuccess() {
         Connection connection = null;
@@ -327,7 +328,7 @@ public class testInsertData {
         }
     }
 
-        //TestPayments create fail
+    //TestPayments create fail
     @Test
     void TestInsertPaymentsFailure() {
         Connection connection = null;
@@ -341,8 +342,8 @@ public class testInsertData {
 
         String PaymentsTest = "INSERT INTO Payments VALUES (?,?,?,?,?)";
 
-        try(PreparedStatement stmt = connection.prepareStatement(PaymentsTest);
-        PreparedStatement stmtFailCase = connection.prepareStatement(PaymentsTest)){
+        try (PreparedStatement stmt = connection.prepareStatement(PaymentsTest);
+             PreparedStatement stmtFailCase = connection.prepareStatement(PaymentsTest)) {
 
             stmt.setInt(1, 10);
             stmt.setInt(2, 10);
@@ -358,9 +359,7 @@ public class testInsertData {
             stmtFailCase.setString(5, "TestFailPaymentMethod");
 
 
-
-            assertThrows(SQLIntegrityConstraintViolationException.class , stmtFailCase::executeUpdate);
-
+            assertThrows(SQLIntegrityConstraintViolationException.class, stmtFailCase::executeUpdate);
 
 
         } catch (SQLException e) {
@@ -370,14 +369,91 @@ public class testInsertData {
 
     }
 
-        //TestProduct create pass
-        //TestProduct create fail
+@Test
+void TestInsertWarehouseSuccess() {
+        Connection connection = null;
 
-        //TestWareHouse create pass
-        //TestWareHouse create fail
+    try {
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+        connection.setAutoCommit(false);
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+
+    String WareHouseTest = "INSERT INTO Warehouse VALUES (?,?)";
+
+    try(PreparedStatement stmt = connection.prepareStatement(WareHouseTest)){
+
+        stmt.setInt(1, 10);
+        stmt.setString(2, "TestWarehouse");
+        stmt.executeUpdate();
+
+    }catch(SQLException e){
+        throw new RuntimeException(e);
+    }
 
 }
+@Test
+    void TestInsertWarehouseFailure() {
+        Connection connection = null;
+    try {
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+        connection.setAutoCommit(false);
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+        String WareHouseTest = "INSERT INTO Warehouse VALUES (?,?)";
 
+    try (PreparedStatement stmt = connection.prepareStatement(WareHouseTest);
+         PreparedStatement stmtFailCase = connection.prepareStatement(WareHouseTest)) {
+
+        stmt.setInt(1, 10);
+        stmt.setString(2, "TestWarehouseFail");
+        stmt.executeUpdate();
+
+        stmtFailCase.setInt(1, 10);
+        stmtFailCase.setString(2, "TestFailWarehouse");
+
+
+        assertThrows(SQLIntegrityConstraintViolationException.class, stmtFailCase::executeUpdate);
+
+
+    }catch (SQLException e){
+        throw new RuntimeException(e);
+    }
+    }
+
+
+    //TestProduct create pass
+@Test
+void TestInsertProductSuccess() {
+        Connection connection = null;
+    try {
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+        connection.setAutoCommit(false);
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+    String ProductTest = "INSERT INTO Product VALUES (?,?,?,?,?,?,?,?)";
+    try(PreparedStatement stmt = connection.prepareStatement(ProductTest)) {
+
+        stmt.setInt(1, 10);
+        stmt.setString(2, "TestName");
+        stmt.setString(3, "TestDescription");
+        stmt.setInt(4, 50);
+        stmt.setInt(5, 3);
+        stmt.setInt(6, 3);
+
+    }catch (SQLException e){
+        throw new RuntimeException(e);
+    }
+    }
+
+
+
+
+}
+    //TestProduct create fail
 
 
 
