@@ -36,18 +36,15 @@ public class InsertData {
                 switch (TableSelect) {
 
                     case 1:
-                        //call Address creator
+                        InsertAddress();
                         break;
                     case 2:
-                        //call Brand creator
                         InsertBrand();
                         break;
                     case 3:
-                        //call category creator
                         InsertCategory();
                         break;
                     case 4:
-                        //call Customer creator
                         InsertCustomer();
                         break;
                     case 5:
@@ -100,8 +97,8 @@ public class InsertData {
                 throw new RuntimeException(e);
             }
 
-            String sql2 = "Insert into Brand values(?,?)";
-            try (PreparedStatement stmt = connection.prepareStatement(sql2)) {
+            String Brand = "Insert into Brand values(?,?)";
+            try (PreparedStatement stmt = connection.prepareStatement(Brand)) {
                 stmt.setInt(1, BrandID);
                 stmt.setString(2, BrandName);
                 stmt.executeUpdate();
@@ -144,8 +141,6 @@ public class InsertData {
                 throw new RuntimeException(e);
             }
         }
-
-
         public static void InsertCustomer(){
 
         Scanner scanner = new Scanner(System.in);
@@ -186,12 +181,58 @@ public class InsertData {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
-
         }
 
         //create Address receive method
-        //create Address create method
+    public static void InsertAddress(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Address ID: ");
+        int AddressID = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter CustomerID");
+        int CustomerID = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter Country");
+        String Country = scanner.nextLine();
+        System.out.println("Enter City");
+        String City = scanner.nextLine();
+        System.out.println("Enter Street");
+        String Street = scanner.nextLine();
+        System.out.println("Enter Eircode");
+        String Eircode = scanner.nextLine();
+
+        CreateAddress(AddressID,CustomerID,Country,City,Street,Eircode);
+
+
+    }
+    public static void CreateAddress(int AddressID, int CustomerID, String Country, String City, String Street, String Eircode) {
+
+        Connection connection;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection.setAutoCommit(false);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        String Address= "INSERT INTO Address VALUES (?,?,?,?,?,?)";
+
+        try (PreparedStatement stmt = connection.prepareStatement(Address))
+        {
+            stmt.setInt(1,AddressID);
+            stmt.setInt(2,CustomerID);
+            stmt.setString(3,Country);
+            stmt.setString(4,City);
+            stmt.setString(5,Street);
+            stmt.setString(6,Eircode);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
         //create orders receive method
         //create orders create method
@@ -200,7 +241,7 @@ public class InsertData {
         //create payments create method
 
         //create product receive method
-        //create procuct create method
+        //create product create method
 
         //create warehouse receive method
         //create warehouse create method

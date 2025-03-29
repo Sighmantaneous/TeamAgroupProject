@@ -111,12 +111,12 @@ public class testInsertData {
     void TestInsertCustomerSuccess() {
         Connection connection = null;
 
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
-            connection.setAutoCommit(false);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+                connection.setAutoCommit(false);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
 
         String CustomerTest = "Insert into Customer values(?,?,?,?,?)";
 
@@ -172,8 +172,74 @@ public class testInsertData {
             }
         }
 
-        //TestAddress create pass
+    @Test
+    void TestInsertAddressSuccess() {
+        Connection connection = null;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection.setAutoCommit(false);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        String AddressTest = "INSERT INTO Address VALUES (?,?,?,?,?,?)";
+
+        try (PreparedStatement stmt = connection.prepareStatement(AddressTest))
+        {
+            stmt.setInt(1,10);
+            stmt.setInt(2,3);
+            stmt.setString(3,"IrelandTest");
+            stmt.setString(4,"GalwayTest");
+            stmt.setString(5,"123 abbystreet");
+            stmt.setString(6,"H91e999");
+            stmt.executeUpdate();
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
         //TestAddress create fail
+
+    @Test
+    void TestInsertAddressFailure() {
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection.setAutoCommit(false);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        String AddressTest = "INSERT INTO Address VALUES (?,?,?,?,?,?)";
+
+        try (PreparedStatement stmt = connection.prepareStatement(AddressTest);
+        PreparedStatement stmtFailCase = connection.prepareStatement(AddressTest))
+        {
+            stmt.setInt(1,10);
+            stmt.setInt(2,3);
+            stmt.setString(3,"IrelandTest");
+            stmt.setString(4,"GalwayTest");
+            stmt.setString(5,"123 abbystreet");
+            stmt.setString(6,"H91e999");
+            stmt.executeUpdate();
+
+
+            stmtFailCase .setInt(1, 10);
+            stmtFailCase .setString(2, "3");
+            stmtFailCase .setString(3, "FailCountry");
+            stmtFailCase .setString(4, "FailCity");
+            stmtFailCase .setString(5, "FailStreet");
+            stmtFailCase .setString(6, "FailEircode ");
+
+            assertThrows(SQLIntegrityConstraintViolationException.class, stmtFailCase::executeUpdate);
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
         //TestOrders create pass
         //TestOrders create fail

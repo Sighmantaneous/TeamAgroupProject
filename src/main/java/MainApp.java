@@ -25,9 +25,13 @@ public class MainApp {
                     break;
 
 
-
-
-
+                case 5:
+                    exit = false;
+                    System.out.println("Good-Bye");
+                    break;
+                default:
+                    System.out.println("Invalid entry try again");
+                    break;
 
             }
 
