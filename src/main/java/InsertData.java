@@ -45,7 +45,7 @@ public class InsertData {
                         InsertCustomer();
                         break;
                     case 5:
-                        //call Order creator
+                        InsertOrders();
                         break;
 
                     case 6:
@@ -207,7 +207,6 @@ public class InsertData {
         Connection connection;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
-            connection.setAutoCommit(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -232,7 +231,7 @@ public class InsertData {
 
 
         //create orders receive method
-        public static void InsertOrders(String[] args) {
+        public static void InsertOrders() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Order ID: ");
         int OrderID = scanner.nextInt();
@@ -249,12 +248,11 @@ public class InsertData {
         Connection connection;
             try {
                 connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
-                connection.setAutoCommit(false);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
 
-            String Orders = "Insert into Order values(?,?,?,?)";
+            String Orders = "Insert INTO Orders values(?,?,?,?)";
 
             try (PreparedStatement stmt = connection.prepareStatement(Orders))
             {
@@ -262,7 +260,6 @@ public class InsertData {
                 stmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
                 stmt.setInt(3,OrderCost);
                 stmt.setInt(4,CustomerID);
-
                 stmt.executeUpdate();
             }
             catch (SQLException e) {
@@ -270,10 +267,49 @@ public class InsertData {
             }
 
         }
-        //create orders create method
 
         //create payments receive method
-        //create payments create method
+    public static void InsertPayments(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Payment ID: ");
+        int PaymentID = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Order ID");
+        int OrderID = scanner.nextInt();
+        System.out.println("Payment Amount ");
+        int PaymentAmount = scanner.nextInt();
+        System.out.println("Payment method");
+        String PaymentMethod = scanner.nextLine();
+        scanner.nextLine();
+        CreatePayments(PaymentID,OrderID,PaymentAmount,PaymentMethod);
+    }
+    public static void CreatePayments(int PaymentID, int OrderID,int PaymentAmount ,String PaymentMethod) {
+
+        Connection connection;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        String Payments = "Insert INTO Payments values(?,?,?,?)";
+
+        try(PreparedStatement stmt = connection.prepareStatement(Payments)){
+
+            stmt.setInt(1,PaymentID);
+            stmt.setInt(2,OrderID);
+            stmt.setInt(3,PaymentAmount);
+            stmt.setTimestamp(4,new Timestamp(System.currentTimeMillis()));
+            stmt.setString(5,PaymentMethod);
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
 
         //create product receive method
         //create product create method

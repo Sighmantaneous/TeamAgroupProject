@@ -302,9 +302,73 @@ public class testInsertData {
         }
     }
         //TestPayments create pass
+    @Test
+    void TestInsertPaymentsSuccess() {
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection.setAutoCommit(false);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        String PaymentsTest = "INSERT INTO Payments VALUES (?,?,?,?,?)";
+        try (PreparedStatement stmt = connection.prepareStatement(PaymentsTest)) {
 
+            stmt.setInt(1, 10);
+            stmt.setInt(2, 10);
+            stmt.setInt(3, 50);
+            stmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+            stmt.setString(5, "TestPaymentMethod");
+            stmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
         //TestPayments create fail
+    @Test
+    void TestInsertPaymentsFailure() {
+        Connection connection = null;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection.setAutoCommit(false);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        String PaymentsTest = "INSERT INTO Payments VALUES (?,?,?,?,?)";
+
+        try(PreparedStatement stmt = connection.prepareStatement(PaymentsTest);
+        PreparedStatement stmtFailCase = connection.prepareStatement(PaymentsTest)){
+
+            stmt.setInt(1, 10);
+            stmt.setInt(2, 10);
+            stmt.setInt(3, 50);
+            stmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+            stmt.setString(5, "TestPaymentMethod");
+            stmt.executeUpdate();
+
+            stmtFailCase.setInt(1, 10);
+            stmtFailCase.setInt(2, 10);
+            stmtFailCase.setInt(3, 50);
+            stmtFailCase.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+            stmtFailCase.setString(5, "TestFailPaymentMethod");
+
+
+
+            assertThrows(SQLIntegrityConstraintViolationException.class , stmtFailCase::executeUpdate);
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
 
         //TestProduct create pass
         //TestProduct create fail
