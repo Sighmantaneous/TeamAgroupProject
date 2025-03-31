@@ -1,3 +1,5 @@
+import com.mysql.cj.x.protobuf.MysqlxCrud;
+
 import java.util.Scanner;
 
 public class MainApp {
@@ -24,6 +26,10 @@ public class MainApp {
                     InsertData.main(args);
                     break;
 
+                case 3:
+                    System.out.println("You have entered update function");
+                    UpdateData.main(args);
+                    break;
 
                 case 5:
                     exit = false;
