@@ -6,26 +6,20 @@ import java.util.Scanner;
 
 public class deleteData {
     public static void main(String[] args) {
-        // Database URL, username, and password
+        // Database details
         String jdbcURL = "jdbc:mysql://localhost/groupProjectDatabase";
         String dbUser = "root";
-        String dbPassword = "password";
-
-        // SQL DELETE query
-        String sql = "DELETE FROM Customer WHERE ID = ?";
-        Connection connection;
+        String dbPassword = "EmrePassword24.";
 
         try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
+            Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
             Scanner scanner = new Scanner(System.in);
 
-            // Establishing a connection
-            connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
-
             boolean exit = true;
-
             while (exit) {
-                System.out.println("Select table to create Table rows:");
+                System.out.println("Select table to delete a record:");
                 System.out.println("1. Address");
                 System.out.println("2. Brand");
                 System.out.println("3. Category");
@@ -36,67 +30,47 @@ public class deleteData {
                 System.out.println("8. Warehouse");
                 System.out.println("9. Exit");
                 System.out.print("Enter choice: ");
-                int TableSelect = scanner.nextInt();
+                int tableSelect = scanner.nextInt();
                 scanner.nextLine();
 
-                switch (TableSelect) {
-
-                    case 1:
-                        deleteAddress();
-                        break;
-                    case 2:
-                        deleteBrand();
-                        break;
-                    case 1:
-                        deleteCategory();
-                        break;
-                    case 1:
-                        deleteCustomer();
-                        break;
-                    case 1:
-                        deleteOrders();
-                        break;
-                    case 1:
-                        deletePayments();
-                        break;
-                    case 1:
-                        deleteProduct();
-                        break;
-                    case 1:
-                        deleteWarehouse();
-                        break;
-                    case 1:
-                        exit = false;
-                        break;
-
-                    default:
-                        System.out.println("Invalid choice. Try again.");
-                        break;
+                switch (tableSelect) {
+                    case 1 -> deleteRecord(connection, "Address", scanner);
+                    case 2 -> deleteRecord(connection, "Brand", scanner);
+                    case 3 -> deleteRecord(connection, "Category", scanner);
+                    case 4 -> deleteRecord(connection, "Customer", scanner);
+                    case 5 -> deleteRecord(connection, "Orders", scanner);
+                    case 6 -> deleteRecord(connection, "Payments", scanner);
+                    case 7 -> deleteRecord(connection, "Product", scanner);
+                    case 8 -> deleteRecord(connection, "Warehouse", scanner);
+                    case 9 -> exit = false;
+                    default -> System.out.println("Invalid choice. Try again.");
                 }
             }
+
+            connection.close();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    public static void deleteRecord(Connection connection, String tableName, Scanner scanner) {
+        System.out.print("Enter ID to delete from " + tableName + ": ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
 
-            // Creating a PreparedStatement
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, 1); // Set the ID of the record to delete
-
-            // Executing the DELETE operation
+        String sql = "DELETE FROM " + tableName + " WHERE ID = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
             int rowsDeleted = statement.executeUpdate();
-            if (rowsDeleted > 0) {
-                System.out.println("A record was deleted successfully!");
-            }
 
-            // Closing the connection
-            statement.close();
-            connection.close();
+            if (rowsDeleted > 0) {
+                System.out.println("Record deleted successfully from " + tableName + "!");
+            } else {
+                System.out.println("No record found with ID: " + id);
+            }
         } catch (SQLException e) {
+            System.out.println("Error deleting record from " + tableName);
             e.printStackTrace();
         }
     }
-
-    public static void deleteCustomer(Connection connection) {
-
-    }
+}

@@ -1,0 +1,2 @@
+public class DeleteData {
+}
