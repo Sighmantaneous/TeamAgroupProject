@@ -22,6 +22,8 @@ public class deleteData {
             // Establishing a connection
             connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
 
+            boolean exit = true;
+
             while (exit) {
                 System.out.println("Select table to create Table rows:");
                 System.out.println("1. Address");
@@ -40,8 +42,33 @@ public class deleteData {
                 switch (TableSelect) {
 
                     case 1:
+                        deleteAddress();
+                        break;
+                    case 2:
+                        deleteBrand();
+                        break;
+                    case 1:
+                        deleteCategory();
+                        break;
+                    case 1:
                         deleteCustomer();
                         break;
+                    case 1:
+                        deleteOrders();
+                        break;
+                    case 1:
+                        deletePayments();
+                        break;
+                    case 1:
+                        deleteProduct();
+                        break;
+                    case 1:
+                        deleteWarehouse();
+                        break;
+                    case 1:
+                        exit = false;
+                        break;
+
                     default:
                         System.out.println("Invalid choice. Try again.");
                         break;
@@ -70,6 +97,6 @@ public class deleteData {
         }
     }
 
-    public static void deleteCustomer() {
+    public static void deleteCustomer(Connection connection) {
 
     }
