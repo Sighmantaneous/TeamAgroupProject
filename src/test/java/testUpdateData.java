@@ -7,18 +7,32 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class testUpdateData
 {
-
+    private Connection connection;
     @BeforeEach
     void setup()
     {
         try
         {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/groupProjectDatabase", "root", "password");
             connection.setAutoCommit(false);
         }
         catch (SQLException e)
         {
             throw new RuntimeException("Failed to connect to database", e);
+        }
+    }
+
+    @AfterEach
+    void close()
+    {
+        if(connection != null)
+        {
+            try {
+                connection.rollback();
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -28,10 +42,6 @@ public class testUpdateData
     {
         String updateSQL = "UPDATE Brand SET brandName = ? WHERE brandID = ?";
 
-    try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
-    {
-        connection.setAutoCommit(false);
-
     try(PreparedStatement statement = connection.prepareStatement(updateSQL))
     {
         statement.setString(1, "newBrand");
@@ -39,7 +49,6 @@ public class testUpdateData
         int rowsUpdated = statement.executeUpdate();
         assertEquals(1, rowsUpdated);
         System.out.println("Rows updated: " + rowsUpdated);
-    }
     connection.rollback();
     }
     catch (SQLException e)
@@ -53,8 +62,6 @@ public class testUpdateData
     void TestUpdateBrandFail()
     {
      String updateSQL = "UPDATE Brand SET brandName = ? WHERE brandID = ?";
-     try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
-     {
          try(PreparedStatement statement = connection.prepareStatement(updateSQL))
          {
              statement.setString(1, "newBrand");
@@ -63,8 +70,7 @@ public class testUpdateData
              assertEquals(0, rowsUpdated);
              System.out.println("Error: No Rows updated.");
          }
-         connection.rollback();
-     }
+
      catch (SQLException e)
      {
          e.printStackTrace();
@@ -78,10 +84,6 @@ public class testUpdateData
     {
         String updateSQL = "UPDATE Customer SET customerName =? , customerLastName = ? , customerEmail = ?, customerPhone = ? WHERE customerID = ?";
 
-        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
-        {
-            connection.setAutoCommit(false);
-
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "newName");
@@ -92,8 +94,6 @@ public class testUpdateData
                 assertEquals(1, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
             }
-            connection.rollback();
-        }
         catch (SQLException e)
         {
             e.printStackTrace();
@@ -105,8 +105,7 @@ public class testUpdateData
     void TestUpdateCustomerFail()
     {
         String updateSQL = "UPDATE Customer SET customerName =? , customerLastName = ? , customerEmail = ?, customerPhone = ? WHERE customerID = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
-        {
+
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "invalidName");
@@ -118,8 +117,6 @@ public class testUpdateData
                 assertEquals(0, rowsUpdated);
                 System.out.println("Error: No Rows updated.");
             }
-            connection.rollback();
-        }
         catch (SQLException e)
         {
             e.printStackTrace();
@@ -134,10 +131,6 @@ public class testUpdateData
     {
         String updateSQL = "UPDATE Warehouse SET warehouseAddress = ? WHERE warehouseID = ?";
 
-        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
-        {
-            connection.setAutoCommit(false);
-
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "newWarehouseAddress");
@@ -146,8 +139,7 @@ public class testUpdateData
                 assertEquals(1, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
             }
-            connection.rollback();
-        }
+
         catch (SQLException e)
         {
             e.printStackTrace();
@@ -159,8 +151,7 @@ public class testUpdateData
     void TestUpdateWarehouseFail()
     {
         String updateSQL = "UPDATE Warehouse SET warehouseAddress = ? WHERE warehouseID = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
-        {
+
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "invalidWarehouseAddress");
@@ -169,8 +160,6 @@ public class testUpdateData
                 assertEquals(0, rowsUpdated);
                 System.out.println("Error: No Rows updated.");
             }
-            connection.rollback();
-        }
         catch (SQLException e)
         {
             e.printStackTrace();
@@ -185,10 +174,6 @@ public class testUpdateData
     {
         String updateSQL = "UPDATE Category SET categoryName = ? WHERE categoryID = ?";
 
-        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
-        {
-            connection.setAutoCommit(false);
-
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "newCategory");
@@ -196,8 +181,6 @@ public class testUpdateData
                 assertEquals(1, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
             }
-            connection.rollback();
-        }
         catch (SQLException e)
         {
             e.printStackTrace();
@@ -209,8 +192,7 @@ public class testUpdateData
     void TestUpdateCategoryFail()
     {
         String updateSQL = "UPDATE Category SET categoryName = ? WHERE categoryID = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
-        {
+
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "invalidCategory");
@@ -219,8 +201,7 @@ public class testUpdateData
                 assertEquals(0, rowsUpdated);
                 System.out.println("Error: No Rows updated.");
             }
-            connection.rollback();
-        }
+
         catch (SQLException e)
         {
             e.printStackTrace();
@@ -235,10 +216,6 @@ public class testUpdateData
     {
         String updateSQL = "UPDATE Product SET productName = ?, productDescription = ?, productPrice = ?, productStock = ? WHERE productID = ?";
 
-        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
-        {
-            connection.setAutoCommit(false);
-
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "newProductName");
@@ -249,8 +226,7 @@ public class testUpdateData
                 assertEquals(1, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
             }
-            connection.rollback();
-        }
+
         catch (SQLException e)
         {
             e.printStackTrace();
@@ -262,8 +238,7 @@ public class testUpdateData
     void TestUpdateProductFail()
     {
         String updateSQL = "UPDATE Product SET productName = ?, productDescription = ?, productPrice = ?, productStock = ? WHERE productID = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
-        {
+
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "invalidProductName");
@@ -275,8 +250,6 @@ public class testUpdateData
                 assertEquals(0, rowsUpdated);
                 System.out.println("Error: No Rows updated.");
             }
-            connection.rollback();
-        }
         catch (SQLException e)
         {
             e.printStackTrace();
@@ -290,10 +263,6 @@ public class testUpdateData
     {
         String updateSQL = "UPDATE Orders SET orderDate = ?, orderCost = ? WHERE orderID = ?";
 
-        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
-        {
-            connection.setAutoCommit(false);
-
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "newOrderDate");
@@ -301,9 +270,9 @@ public class testUpdateData
                 int rowsUpdated = statement.executeUpdate();
                 assertEquals(1, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
+
             }
-            connection.rollback();
-        }
+
         catch (SQLException e)
         {
             e.printStackTrace();
@@ -315,8 +284,7 @@ public class testUpdateData
     void TestUpdateOrdersFail()
     {
         String updateSQL = "UPDATE Orders SET orderDate = ?, orderCost = ? WHERE orderID = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
-        {
+
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "invalidOrderDate");
@@ -326,8 +294,7 @@ public class testUpdateData
                 assertEquals(0, rowsUpdated);
                 System.out.println("Error: No Rows updated.");
             }
-            connection.rollback();
-        }
+
         catch (SQLException e)
         {
             e.printStackTrace();
@@ -342,10 +309,6 @@ public class testUpdateData
     {
         String updateSQL = "UPDATE Address SET country = ?, city = ?, street = ?, eircode = ? WHERE addressID = ?";
 
-        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
-        {
-            connection.setAutoCommit(false);
-
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "newCountry");
@@ -356,8 +319,7 @@ public class testUpdateData
                 assertEquals(1, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
             }
-            connection.rollback();
-        }
+
         catch (SQLException e)
         {
             e.printStackTrace();
@@ -369,8 +331,7 @@ public class testUpdateData
     void TestUpdateAddressFail()
     {
         String updateSQL = "UPDATE Address SET country = ?, city = ?, street = ?, eircode = ? WHERE addressID = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
-        {
+
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "invalidCountry");
@@ -382,8 +343,6 @@ public class testUpdateData
                 assertEquals(0, rowsUpdated);
                 System.out.println("Error: No Rows updated.");
             }
-            connection.rollback();
-        }
         catch (SQLException e)
         {
             e.printStackTrace();
@@ -397,10 +356,6 @@ public class testUpdateData
     {
         String updateSQL = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE paymentsID = ?";
 
-        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
-        {
-            connection.setAutoCommit(false);
-
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "newPaymentAmount");
@@ -410,8 +365,6 @@ public class testUpdateData
                 assertEquals(1, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
             }
-            connection.rollback();
-        }
         catch (SQLException e)
         {
             e.printStackTrace();
@@ -423,8 +376,6 @@ public class testUpdateData
     void TestUpdatePaymentFail()
     {
         String updateSQL = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE paymentsID = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
-        {
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "invalidPaymentAmount");
@@ -435,8 +386,6 @@ public class testUpdateData
                 assertEquals(0, rowsUpdated);
                 System.out.println("Error: No Rows updated.");
             }
-            connection.rollback();
-        }
         catch (SQLException e)
         {
             e.printStackTrace();
