@@ -6,16 +6,15 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 import java.sql.Statement;
 
-public class testUpdate
+public class testUpdateData
 {
-    private Connection connection;
 
     @BeforeEach
     void setup()
     {
         try
         {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password");
             connection.setAutoCommit(false);
         }
         catch (SQLException e)
