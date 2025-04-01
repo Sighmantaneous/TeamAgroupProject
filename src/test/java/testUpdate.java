@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
-import java.sql.Statement;
+import java.sql.*;
 
 public class testUpdate
 {
