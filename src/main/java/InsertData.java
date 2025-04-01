@@ -14,7 +14,7 @@ public class InsertData {
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/groupProjectDatabase", "root", "password");
             while (exit) {
                 System.out.println("Select table to create Table rows:");
                 System.out.println("1. Address");
