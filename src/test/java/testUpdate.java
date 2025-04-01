@@ -15,7 +15,7 @@ public class testUpdate
     {
         try
         {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
             connection.setAutoCommit(false);
         }
         catch (SQLException e)
@@ -30,7 +30,7 @@ public class testUpdate
     {
         String updateSQL = "UPDATE Brand SET brandName = ? WHERE brandID = ?";
 
-    try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
+    try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
     {
         connection.setAutoCommit(false);
 
@@ -55,7 +55,7 @@ public class testUpdate
     void TestUpdateBrandFail()
     {
      String updateSQL = "UPDATE Brand SET brandName = ? WHERE brandID = ?";
-     try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
+     try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
      {
          try(PreparedStatement statement = connection.prepareStatement(updateSQL))
          {
@@ -80,7 +80,7 @@ public class testUpdate
     {
         String updateSQL = "UPDATE Customer SET customerName =? , customerLastName = ? , customerEmail = ?, customerPhone = ? WHERE customerID = ?";
 
-        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
+        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
         {
             connection.setAutoCommit(false);
 
@@ -107,7 +107,7 @@ public class testUpdate
     void TestUpdateCustomerFail()
     {
         String updateSQL = "UPDATE Customer SET customerName =? , customerLastName = ? , customerEmail = ?, customerPhone = ? WHERE customerID = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
         {
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
@@ -136,7 +136,7 @@ public class testUpdate
     {
         String updateSQL = "UPDATE Warehouse SET warehouseAddress = ? WHERE warehouseID = ?";
 
-        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
+        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
         {
             connection.setAutoCommit(false);
 
@@ -161,7 +161,7 @@ public class testUpdate
     void TestUpdateWarehouseFail()
     {
         String updateSQL = "UPDATE Warehouse SET warehouseAddress = ? WHERE warehouseID = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
         {
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
@@ -187,7 +187,7 @@ public class testUpdate
     {
         String updateSQL = "UPDATE Category SET categoryName = ? WHERE categoryID = ?";
 
-        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
+        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
         {
             connection.setAutoCommit(false);
 
@@ -210,8 +210,8 @@ public class testUpdate
     @Test
     void TestUpdateCategoryFail()
     {
-        String updateSQL = "UPDATE Category SET  = ? WHERE  = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
+        String updateSQL = "UPDATE Category SET CategoryName = ? WHERE categoryID = ?";
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
         {
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
@@ -237,7 +237,7 @@ public class testUpdate
     {
         String updateSQL = "UPDATE Product SET productName = ?, productDescription = ?, productPrice = ?, productStock = ? WHERE productID = ?";
 
-        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
+        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
         {
             connection.setAutoCommit(false);
 
@@ -264,7 +264,7 @@ public class testUpdate
     void TestUpdateProductFail()
     {
         String updateSQL = "UPDATE Product SET productName = ?, productDescription = ?, productPrice = ?, productStock = ? WHERE productID = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
         {
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
@@ -292,7 +292,7 @@ public class testUpdate
     {
         String updateSQL = "UPDATE Orders SET orderDate = ?, orderCost = ? WHERE orderID = ?";
 
-        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
+        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
         {
             connection.setAutoCommit(false);
 
@@ -317,7 +317,7 @@ public class testUpdate
     void TestUpdateOrdersFail()
     {
         String updateSQL = "UPDATE Orders SET orderDate = ?, orderCost = ? WHERE orderID = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
         {
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
@@ -344,7 +344,7 @@ public class testUpdate
     {
         String updateSQL = "UPDATE Address SET country = ?, city = ?, street = ?, eircode = ? WHERE addressID = ?";
 
-        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
+        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
         {
             connection.setAutoCommit(false);
 
@@ -371,7 +371,7 @@ public class testUpdate
     void TestUpdateAddressFail()
     {
         String updateSQL = "UPDATE Address SET country = ?, city = ?, street = ?, eircode = ? WHERE addressID = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
         {
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
@@ -397,9 +397,9 @@ public class testUpdate
     @Test
     void TestUpdatePaymentSuccess()
     {
-        String updateSQL = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE = paymentsID = ?";
+        String updateSQL = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE paymentsID = ?";
 
-        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
+        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
         {
             connection.setAutoCommit(false);
 
@@ -424,8 +424,8 @@ public class testUpdate
     @Test
     void TestUpdatePaymentFail()
     {
-        String updateSQL = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE = paymentsID = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
+        String updateSQL = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE paymentsID = ?";
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
         {
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {

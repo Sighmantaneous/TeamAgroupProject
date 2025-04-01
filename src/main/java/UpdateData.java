@@ -9,7 +9,7 @@ public class UpdateData
         boolean exit = false;
         Scanner sc = new Scanner(System.in);
 
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password"))
         {
             while (!exit)
             {
