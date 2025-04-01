@@ -208,7 +208,7 @@ public class testUpdateData
     @Test
     void TestUpdateCategoryFail()
     {
-        String updateSQL = "UPDATE Category SET  = ? WHERE  = ?";
+        String updateSQL = "UPDATE Category SET categoryName = ? WHERE categoryID = ?";
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
         {
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
@@ -395,7 +395,7 @@ public class testUpdateData
     @Test
     void TestUpdatePaymentSuccess()
     {
-        String updateSQL = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE = paymentsID = ?";
+        String updateSQL = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE paymentsID = ?";
 
         try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
         {
@@ -422,7 +422,7 @@ public class testUpdateData
     @Test
     void TestUpdatePaymentFail()
     {
-        String updateSQL = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE = paymentsID = ?";
+        String updateSQL = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE paymentsID = ?";
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", ""))
         {
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
