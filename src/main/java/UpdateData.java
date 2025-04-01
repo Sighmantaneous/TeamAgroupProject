@@ -9,9 +9,10 @@ public class UpdateData
         boolean exit = false;
         Scanner sc = new Scanner(System.in);
 
-        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "james", "password"))
         {
-            while(!exit) {
+            while (!exit)
+            {
                 System.out.println("Select table to update");
                 System.out.println("1, Address");
                 System.out.println("2, Brand");
@@ -26,7 +27,8 @@ public class UpdateData
                 int TableSelect = sc.nextInt();
                 sc.nextLine();
 
-                switch (TableSelect) {
+                switch (TableSelect)
+                {
                     case 1:
                         updateAddress(connection, sc);
                         break;
@@ -70,7 +72,7 @@ public class UpdateData
                 }
             }
         }
-        catch(SQLException e)
+        catch (SQLException e)
         {
             e.printStackTrace();
         }
@@ -95,7 +97,7 @@ public class UpdateData
         String newEircode = sc.nextLine();
 
         String sql = "UPDATE Address SET country = ?, city = ?, street = ?, eircode = ? WHERE AddressID = ?";
-        try(PreparedStatement statement = connection.prepareStatement(sql))
+        try (PreparedStatement statement = connection.prepareStatement(sql))
         {
             statement.setString(1, newCountry);
             statement.setString(2, newCity);
@@ -104,13 +106,13 @@ public class UpdateData
 
             int rowsUpdated = statement.executeUpdate();
 
-            if(rowsUpdated > 0)
+            if (rowsUpdated > 0)
             {
-                System.out.println("Brand updated successfully.");
+                System.out.println("Rows updated successfully.");
             }
             else
             {
-                System.out.println("Error updating brand.");
+                System.out.println("Error updating rows.");
             }
         }
         catch (SQLException e)
@@ -129,19 +131,19 @@ public class UpdateData
         String newBrandName = sc.nextLine();
 
         String sql = "UPDATE Brand SET brand_name = ? WHERE brandID = ?";
-        try(PreparedStatement statement = connection.prepareStatement(sql))
+        try (PreparedStatement statement = connection.prepareStatement(sql))
         {
             statement.setString(1, newBrandName);
-            statement.setInt(2,brandID);
+
             int rowsUpdated = statement.executeUpdate();
 
-            if(rowsUpdated > 0)
+            if (rowsUpdated > 0)
             {
-                System.out.println("Brand updated successfully.");
+                System.out.println("Row updated successfully.");
             }
             else
             {
-                System.out.println("Error updating brand.");
+                System.out.println("Error updating row.");
             }
         }
         catch (SQLException e)
@@ -150,26 +152,33 @@ public class UpdateData
         }
     }
 
-    public static void updateCategory(Connection connection, Scanner sc) {
+    public static void updateCategory(Connection connection, Scanner sc)
+    {
         System.out.println("Enter Category ID to update");
         int categoryID = sc.nextInt();
         sc.nextLine();
 
         System.out.println("Enter new Category Name:");
-        String newCountry = sc.nextLine();
+        String newCategoryName = sc.nextLine();
 
 
         String sql = "UPDATE Category SET categoryName = ? WHERE CategoryID = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (PreparedStatement statement = connection.prepareStatement(sql))
+        {
             statement.setString(1, newCategoryName);
             int rowsUpdated = statement.executeUpdate();
 
-            if (rowsUpdated > 0) {
-                System.out.println("Brand updated successfully.");
-            } else {
-                System.out.println("Error updating brand.");
+            if (rowsUpdated > 0)
+            {
+                System.out.println("Row updated successfully.");
             }
-        } catch (SQLException e) {
+            else
+            {
+                System.out.println("Error updating row.");
+            }
+        }
+        catch (SQLException e)
+        {
             e.printStackTrace();
         }
     }
@@ -194,24 +203,21 @@ public class UpdateData
         String newCustomerPhone = sc.nextLine();
 
         String sql = "UPDATE Customer SET customerName = ?, customerLastName = ?, customerEmail = ?, customerPhone = ? WHERE customerID = ?";
-        try(PreparedStatement statement = connection.prepareStatement(sql))
-        {
-            statement.setString(1,newCustomerName);
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, newCustomerName);
             statement.setString(2, newCustomerLastName);
-            statement.setString(3,newCustomerEmail);
-            statement.setString(4,newCustomerPhone);
-
-                // do I need to add the reference ID? //
+            statement.setString(3, newCustomerEmail);
+            statement.setString(4, newCustomerPhone);
 
             int rowsUpdated = statement.executeUpdate();
 
-            if(rowsUpdated > 0)
+            if (rowsUpdated > 0)
             {
-                System.out.println("Brand updated successfully.");
+                System.out.println("Rows updated successfully.");
             }
             else
             {
-                System.out.println("Error updating brand.");
+                System.out.println("Error updating Rows.");
             }
         }
         catch (SQLException e)
@@ -220,13 +226,152 @@ public class UpdateData
         }
     }
 
+    public static void updateOrders(Connection connection, Scanner sc)
+    {
+        System.out.println("Enter Order ID to update:");
+        int OrderID = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Enter new Order Date:");
+        String newOrderDate = sc.nextLine();
+
+        System.out.println("Enter new Order Cost");
+        String newOrderCost = sc.nextLine();
+
+        String sql = "UPDATE Orders SET orderDate = ?, orderCost WHERE OrderID = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql))
+        {
+            statement.setString(1, newOrderDate);
+            statement.setInt(2, 44); // placeholder order cost
+
+            int rowsUpdated = statement.executeUpdate();
+
+            if (rowsUpdated > 0)
+            {
+                System.out.println("Row updated successfully.");
+            }
+            else
+            {
+                System.out.println("Error updating row.");
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updatePayments(Connection connection, Scanner sc)
+    {
+        System.out.println("Enter Payment ID to update:");
+        int paymentID = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Enter new Payment Amount:");
+        String newPaymentAmount = sc.nextLine();
+
+        System.out.println("Enter new Payment Date");
+        String newPaymentDate = sc.nextLine();
+
+        System.out.println("Enter new Payment Method");
+        String newPaymentMethod = sc.nextLine();
+
+        String sql = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE paymentID = ?";
+        try(PreparedStatement statement = connection.prepareStatement(sql))
+        {
+            statement.setInt(1,55);
+            statement.setString(2, newPaymentDate);
+            statement.setString(3, newPaymentMethod);
+
+            int rowsUpdated = statement.executeUpdate();
+
+            if(rowsUpdated > 0)
+            {
+                System.out.println("Rows updated successfully.");
+            }
+            else
+            {
+                System.out.println("Error updating rows.");
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateProduct(Connection connection, Scanner sc)
+    {
+        System.out.println("Enter Product ID to update:");
+        int productID = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Enter new Product Name:");
+        String newProductName = sc.nextLine();
+
+        System.out.println("Enter new Product Description");
+        String newProductDescription = sc.nextLine();
+
+        System.out.println("Enter new Product Price");
+        String newProductPrice = sc.nextLine();
+
+        System.out.println("Enter new Product Stock Amount");
+        String newProductStock = sc.nextLine();
+
+        String sql = "UPDATE Product SET productName = ?, productDescription = ?, productPrice = ?, productStock = ? WHERE productID = ?";
+        try(PreparedStatement statement = connection.prepareStatement(sql))
+        {
+            statement.setString(1,newProductName);
+            statement.setString(2, newProductDescription);
+            statement.setInt(3, 60); // random product price for now
+            statement.setInt(4, 5); // random product stock for now
+
+            int rowsUpdated = statement.executeUpdate();
+
+            if(rowsUpdated > 0)
+            {
+                System.out.println("Rows updated successfully.");
+            }
+            else
+            {
+                System.out.println("Error updating rows.");
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateWarehouse(Connection connection, Scanner sc)
+    {
+        System.out.println("Enter Warehouse ID to update:");
+        int warehouseID = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Enter new Warehouse Address:");
+        String newWarehouseAddress = sc.nextLine();
 
 
+        String sql = "UPDATE Warehouse SET warehouseAddress = ? WHERE warehouseID = ?";
+        try(PreparedStatement statement = connection.prepareStatement(sql))
+        {
+            statement.setString(1,newWarehouseAddress);
 
+            int rowsUpdated = statement.executeUpdate();
 
-
-
-
-
-
+            if(rowsUpdated > 0)
+            {
+                System.out.println("Row updated successfully.");
+            }
+            else
+            {
+                System.out.println("Error updating row.");
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
