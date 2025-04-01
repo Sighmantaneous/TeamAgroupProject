@@ -1,5 +1,3 @@
-// Update (CRUD) Test //
-
 import org.junit.jupiter.api.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
