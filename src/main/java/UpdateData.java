@@ -103,6 +103,7 @@ public class UpdateData
             statement.setString(2, newCity);
             statement.setString(3, newStreet);
             statement.setString(4, newEircode);
+            statement.setInt(5,)
 
             int rowsUpdated = statement.executeUpdate();
 
@@ -124,16 +125,18 @@ public class UpdateData
     public static void updateBrand(Connection connection, Scanner sc)
     {
         System.out.println("Enter Brand ID to update");
-        int brandID = sc.nextInt();
+        int brandID2 = sc.nextInt();
         sc.nextLine();
 
         System.out.println("Enter new Brand Name");
         String newBrandName = sc.nextLine();
 
-        String sql = "UPDATE Brand SET brand_name = ? WHERE brandID = ?";
+        String sql = "UPDATE Brand SET brandName = ? WHERE ID = ? " ;
         try (PreparedStatement statement = connection.prepareStatement(sql))
         {
             statement.setString(1, newBrandName);
+            statement.setInt(2, brandID2);
+
 
             int rowsUpdated = statement.executeUpdate();
 
