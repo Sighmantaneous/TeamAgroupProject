@@ -96,14 +96,14 @@ public class UpdateData
         System.out.println("Enter new Eircode:");
         String newEircode = sc.nextLine();
 
-        String sql = "UPDATE Address SET country = ?, city = ?, street = ?, eircode = ? WHERE AddressID = ?";
+        String sql = "UPDATE Address SET country = ?, city = ?, street = ?, eircode = ? WHERE ID = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql))
         {
             statement.setString(1, newCountry);
             statement.setString(2, newCity);
             statement.setString(3, newStreet);
             statement.setString(4, newEircode);
-            statement.setInt(5,)
+            statement.setInt(5, addressID);
 
             int rowsUpdated = statement.executeUpdate();
 
@@ -165,10 +165,11 @@ public class UpdateData
         String newCategoryName = sc.nextLine();
 
 
-        String sql = "UPDATE Category SET categoryName = ? WHERE CategoryID = ?";
+        String sql = "UPDATE Category SET categoryName = ? WHERE ID = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql))
         {
             statement.setString(1, newCategoryName);
+            statement.setInt(2, categoryID);
             int rowsUpdated = statement.executeUpdate();
 
             if (rowsUpdated > 0)
@@ -205,12 +206,13 @@ public class UpdateData
         System.out.println("Enter new Customer Phone");
         String newCustomerPhone = sc.nextLine();
 
-        String sql = "UPDATE Customer SET customerName = ?, customerLastName = ?, customerEmail = ?, customerPhone = ? WHERE customerID = ?";
+        String sql = "UPDATE Customer SET customerName = ?, customerLastName = ?, customerEmail = ?, customerPhone = ? WHERE ID = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, newCustomerName);
             statement.setString(2, newCustomerLastName);
             statement.setString(3, newCustomerEmail);
             statement.setString(4, newCustomerPhone);
+            statement.setInt(5, customerID);
 
             int rowsUpdated = statement.executeUpdate();
 
@@ -241,11 +243,12 @@ public class UpdateData
         System.out.println("Enter new Order Cost");
         String newOrderCost = sc.nextLine();
 
-        String sql = "UPDATE Orders SET orderDate = ?, orderCost WHERE OrderID = ?";
+        String sql = "UPDATE Orders SET orderDate = ?, orderCost WHERE ID = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql))
         {
             statement.setString(1, newOrderDate);
             statement.setInt(2, 44); // placeholder order cost
+            statement.setInt(3, OrderID);
 
             int rowsUpdated = statement.executeUpdate();
 
@@ -279,12 +282,13 @@ public class UpdateData
         System.out.println("Enter new Payment Method");
         String newPaymentMethod = sc.nextLine();
 
-        String sql = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE paymentID = ?";
+        String sql = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE ID = ?";
         try(PreparedStatement statement = connection.prepareStatement(sql))
         {
             statement.setInt(1,55);
             statement.setString(2, newPaymentDate);
             statement.setString(3, newPaymentMethod);
+            statement.setInt(4, paymentID);
 
             int rowsUpdated = statement.executeUpdate();
 
@@ -321,13 +325,14 @@ public class UpdateData
         System.out.println("Enter new Product Stock Amount");
         String newProductStock = sc.nextLine();
 
-        String sql = "UPDATE Product SET productName = ?, productDescription = ?, productPrice = ?, productStock = ? WHERE productID = ?";
+        String sql = "UPDATE Product SET productName = ?, productDescription = ?, productPrice = ?, productStock = ? WHERE ID = ?";
         try(PreparedStatement statement = connection.prepareStatement(sql))
         {
             statement.setString(1,newProductName);
             statement.setString(2, newProductDescription);
             statement.setInt(3, 60); // random product price for now
             statement.setInt(4, 5); // random product stock for now
+            statement.setInt(5, productID);
 
             int rowsUpdated = statement.executeUpdate();
 
@@ -350,16 +355,18 @@ public class UpdateData
     {
         System.out.println("Enter Warehouse ID to update:");
         int warehouseID = sc.nextInt();
+
         sc.nextLine();
 
         System.out.println("Enter new Warehouse Address:");
         String newWarehouseAddress = sc.nextLine();
 
 
-        String sql = "UPDATE Warehouse SET warehouseAddress = ? WHERE warehouseID = ?";
+        String sql = "UPDATE Warehouse SET warehouseAddress = ? WHERE ID = ?";
         try(PreparedStatement statement = connection.prepareStatement(sql))
         {
             statement.setString(1,newWarehouseAddress);
+            statement.setInt(2, warehouseID);
 
             int rowsUpdated = statement.executeUpdate();
 
