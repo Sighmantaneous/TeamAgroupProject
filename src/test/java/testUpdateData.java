@@ -47,7 +47,7 @@ public class testUpdateData
         statement.setString(1, "newBrand");
         statement.setInt(2, 1);
         int rowsUpdated = statement.executeUpdate();
-        assertEquals(0, rowsUpdated);
+        assertEquals(1, rowsUpdated);
         System.out.println("Rows updated: " + rowsUpdated);
     connection.rollback();
     }
@@ -92,7 +92,7 @@ public class testUpdateData
                 statement.setString(4, "newPhone");
                 statement.setInt(5, 44);
                 int rowsUpdated = statement.executeUpdate();
-                assertEquals(0, rowsUpdated);
+                assertEquals(4, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
             }
         catch (SQLException e)
@@ -137,7 +137,7 @@ public class testUpdateData
                 statement.setString(1, "newWarehouseAddress");
                 statement.setInt(2, 12);
                 int rowsUpdated = statement.executeUpdate();
-                assertEquals(0, rowsUpdated);
+                assertEquals(1, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
             }
 
@@ -180,7 +180,7 @@ public class testUpdateData
                 statement.setString(1, "newCategory");
                 statement.setInt(2, 39);
                 int rowsUpdated = statement.executeUpdate();
-                assertEquals(0, rowsUpdated);
+                assertEquals(1, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
             }
         catch (SQLException e)
@@ -226,7 +226,7 @@ public class testUpdateData
                 statement.setString(4, "newProductStock");
                 statement.setInt(5, 40);
                 int rowsUpdated = statement.executeUpdate();
-                assertEquals(0, rowsUpdated);
+                assertEquals(4, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
             }
 
@@ -272,7 +272,7 @@ public class testUpdateData
                 statement.setString(2, "newOrderCost");
                 statement.setInt(3, 50);
                 int rowsUpdated = statement.executeUpdate();
-                assertEquals(0, rowsUpdated);
+                assertEquals(2, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
 
             }
@@ -321,7 +321,7 @@ public class testUpdateData
                 statement.setString(4, "newEircode");
                 statement.setInt(5, 16);
                 int rowsUpdated = statement.executeUpdate();
-                assertEquals(0, rowsUpdated);
+                assertEquals(4, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
             }
 
@@ -368,7 +368,7 @@ public class testUpdateData
                 statement.setString(3,"newPaymentMethod");
                 statement.setInt(4, 21);
                 int rowsUpdated = statement.executeUpdate();
-                assertEquals(0, rowsUpdated);
+                assertEquals(3, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
             }
         catch (SQLException e)
