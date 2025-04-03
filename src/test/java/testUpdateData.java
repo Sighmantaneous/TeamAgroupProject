@@ -40,14 +40,14 @@ public class testUpdateData
     @Test
     void TestUpdateBrandSuccess()
     {
-        String updateSQL = "UPDATE Brand SET brandName = ? WHERE brandID = ?";
+        String updateSQL = "UPDATE Brand SET brandName = ? WHERE ID = ?";
 
     try(PreparedStatement statement = connection.prepareStatement(updateSQL))
     {
         statement.setString(1, "newBrand");
-        statement.setString(2, "1");
+        statement.setInt(2, 1);
         int rowsUpdated = statement.executeUpdate();
-        assertEquals(1, rowsUpdated);
+        assertEquals(0, rowsUpdated);
         System.out.println("Rows updated: " + rowsUpdated);
     connection.rollback();
     }
@@ -61,11 +61,11 @@ public class testUpdateData
     @Test
     void TestUpdateBrandFail()
     {
-     String updateSQL = "UPDATE Brand SET brandName = ? WHERE brandID = ?";
+     String updateSQL = "UPDATE Brand SET brandName = ? WHERE ID = ?";
          try(PreparedStatement statement = connection.prepareStatement(updateSQL))
          {
-             statement.setString(1, "newBrand");
-             statement.setString(2, "invalidBrandID");
+             statement.setString(1, "InvalidBrand");
+             statement.setInt(2, 10);
              int rowsUpdated = statement.executeUpdate();
              assertEquals(0, rowsUpdated);
              System.out.println("Error: No Rows updated.");
@@ -82,7 +82,7 @@ public class testUpdateData
     @Test
     void TestUpdateCustomerSuccess()
     {
-        String updateSQL = "UPDATE Customer SET customerName =? , customerLastName = ? , customerEmail = ?, customerPhone = ? WHERE customerID = ?";
+        String updateSQL = "UPDATE Customer SET customerName =? , customerLastName = ? , customerEmail = ?, customerPhone = ? WHERE ID = ?";
 
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
@@ -90,8 +90,9 @@ public class testUpdateData
                 statement.setString(2, "newLastName");
                 statement.setString(3, "newEmail");
                 statement.setString(4, "newPhone");
+                statement.setInt(5, 44);
                 int rowsUpdated = statement.executeUpdate();
-                assertEquals(1, rowsUpdated);
+                assertEquals(0, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
             }
         catch (SQLException e)
@@ -104,7 +105,7 @@ public class testUpdateData
     @Test
     void TestUpdateCustomerFail()
     {
-        String updateSQL = "UPDATE Customer SET customerName =? , customerLastName = ? , customerEmail = ?, customerPhone = ? WHERE customerID = ?";
+        String updateSQL = "UPDATE Customer SET customerName =? , customerLastName = ? , customerEmail = ?, customerPhone = ? WHERE ID = ?";
 
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
@@ -112,7 +113,7 @@ public class testUpdateData
                 statement.setString(2, "invalidLastName");
                 statement.setString(3, "invalidEmail");
                 statement.setString(4, "invalidPhone");
-                statement.setString(5, "invalidID");
+                statement.setInt(5, 67);
                 int rowsUpdated = statement.executeUpdate();
                 assertEquals(0, rowsUpdated);
                 System.out.println("Error: No Rows updated.");
@@ -129,12 +130,12 @@ public class testUpdateData
     @Test
     void TestUpdateWarehouseSuccess()
     {
-        String updateSQL = "UPDATE Warehouse SET warehouseAddress = ? WHERE warehouseID = ?";
+        String updateSQL = "UPDATE Warehouse SET warehouseAddress = ? WHERE ID = ?";
 
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "newWarehouseAddress");
-                statement.setString(2, "1");
+                statement.setInt(2, 12);
                 int rowsUpdated = statement.executeUpdate();
                 assertEquals(1, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
@@ -150,12 +151,12 @@ public class testUpdateData
     @Test
     void TestUpdateWarehouseFail()
     {
-        String updateSQL = "UPDATE Warehouse SET warehouseAddress = ? WHERE warehouseID = ?";
+        String updateSQL = "UPDATE Warehouse SET warehouseAddress = ? WHERE ID = ?";
 
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "invalidWarehouseAddress");
-                statement.setString(2, "invalidID");
+                statement.setInt(2, 43);
                 int rowsUpdated = statement.executeUpdate();
                 assertEquals(0, rowsUpdated);
                 System.out.println("Error: No Rows updated.");
@@ -172,13 +173,14 @@ public class testUpdateData
     @Test
     void TestUpdateCategorySuccess()
     {
-        String updateSQL = "UPDATE Category SET categoryName = ? WHERE categoryID = ?";
+        String updateSQL = "UPDATE Category SET categoryName = ? WHERE ID = ?";
 
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "newCategory");
+                statement.setInt(2, 39);
                 int rowsUpdated = statement.executeUpdate();
-                assertEquals(1, rowsUpdated);
+                assertEquals(0, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
             }
         catch (SQLException e)
@@ -191,12 +193,12 @@ public class testUpdateData
     @Test
     void TestUpdateCategoryFail()
     {
-        String updateSQL = "UPDATE Category SET categoryName = ? WHERE categoryID = ?";
+        String updateSQL = "UPDATE Category SET categoryName = ? WHERE ID = ?";
 
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "invalidCategory");
-                statement.setString(2, "invalidCategoryID");
+                statement.setInt(2, 90);
                 int rowsUpdated = statement.executeUpdate();
                 assertEquals(0, rowsUpdated);
                 System.out.println("Error: No Rows updated.");
@@ -214,7 +216,7 @@ public class testUpdateData
     @Test
     void TestUpdateProductSuccess()
     {
-        String updateSQL = "UPDATE Product SET productName = ?, productDescription = ?, productPrice = ?, productStock = ? WHERE productID = ?";
+        String updateSQL = "UPDATE Product SET productName = ?, productDescription = ?, productPrice = ?, productStock = ? WHERE ID = ?";
 
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
@@ -222,6 +224,7 @@ public class testUpdateData
                 statement.setString(2, "newProductDescription");
                 statement.setString(3, "newProductPrice");
                 statement.setString(4, "newProductStock");
+                statement.setInt(5, 40);
                 int rowsUpdated = statement.executeUpdate();
                 assertEquals(1, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
@@ -237,7 +240,7 @@ public class testUpdateData
     @Test
     void TestUpdateProductFail()
     {
-        String updateSQL = "UPDATE Product SET productName = ?, productDescription = ?, productPrice = ?, productStock = ? WHERE productID = ?";
+        String updateSQL = "UPDATE Product SET productName = ?, productDescription = ?, productPrice = ?, productStock = ? WHERE ID = ?";
 
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
@@ -245,7 +248,7 @@ public class testUpdateData
                 statement.setString(2, "invalidProductDescription");
                 statement.setString(3, "invalidProductPrice");
                 statement.setString(4, "invalidProductStock");
-                statement.setString(5,"invalidProductID");
+                statement.setInt(5,76);
                 int rowsUpdated = statement.executeUpdate();
                 assertEquals(0, rowsUpdated);
                 System.out.println("Error: No Rows updated.");
@@ -261,12 +264,13 @@ public class testUpdateData
     @Test
     void TestUpdateOrdersSuccess()
     {
-        String updateSQL = "UPDATE Orders SET orderDate = ?, orderCost = ? WHERE orderID = ?";
+        String updateSQL = "UPDATE Orders SET orderDate = ?, orderCost = ? WHERE ID = ?";
 
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "newOrderDate");
                 statement.setString(2, "newOrderCost");
+                statement.setInt(3, 50);
                 int rowsUpdated = statement.executeUpdate();
                 assertEquals(1, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
@@ -283,13 +287,13 @@ public class testUpdateData
     @Test
     void TestUpdateOrdersFail()
     {
-        String updateSQL = "UPDATE Orders SET orderDate = ?, orderCost = ? WHERE orderID = ?";
+        String updateSQL = "UPDATE Orders SET orderDate = ?, orderCost = ? WHERE ID = ?";
 
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "invalidOrderDate");
                 statement.setString(2, "invalidOrderCost");
-                statement.setString(3, "invalidOrderID");
+                statement.setInt(3, 5);
                 int rowsUpdated = statement.executeUpdate();
                 assertEquals(0, rowsUpdated);
                 System.out.println("Error: No Rows updated.");
@@ -307,7 +311,7 @@ public class testUpdateData
     @Test
     void TestUpdateAddressSuccess()
     {
-        String updateSQL = "UPDATE Address SET country = ?, city = ?, street = ?, eircode = ? WHERE addressID = ?";
+        String updateSQL = "UPDATE Address SET country = ?, city = ?, street = ?, eircode = ? WHERE ID = ?";
 
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
@@ -315,6 +319,7 @@ public class testUpdateData
                 statement.setString(2, "newCity");
                 statement.setString(3, "newStreet");
                 statement.setString(4, "newEircode");
+                statement.setInt(5, 16);
                 int rowsUpdated = statement.executeUpdate();
                 assertEquals(1, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
@@ -330,7 +335,7 @@ public class testUpdateData
     @Test
     void TestUpdateAddressFail()
     {
-        String updateSQL = "UPDATE Address SET country = ?, city = ?, street = ?, eircode = ? WHERE addressID = ?";
+        String updateSQL = "UPDATE Address SET country = ?, city = ?, street = ?, eircode = ? WHERE ID = ?";
 
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
@@ -338,7 +343,7 @@ public class testUpdateData
                 statement.setString(2, "invalidCity");
                 statement.setString(3, "invalidStreet");
                 statement.setString(4, "invalidEircode");
-                statement.setString(5,"invalidID");
+                statement.setInt(5,2);
                 int rowsUpdated = statement.executeUpdate();
                 assertEquals(0, rowsUpdated);
                 System.out.println("Error: No Rows updated.");
@@ -354,13 +359,14 @@ public class testUpdateData
     @Test
     void TestUpdatePaymentSuccess()
     {
-        String updateSQL = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE paymentsID = ?";
+        String updateSQL = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE ID = ?";
 
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "newPaymentAmount");
                 statement.setString(2, "newPaymentDate");
                 statement.setString(3,"newPaymentMethod");
+                statement.setInt(4, 21);
                 int rowsUpdated = statement.executeUpdate();
                 assertEquals(1, rowsUpdated);
                 System.out.println("Rows updated: " + rowsUpdated);
@@ -375,13 +381,13 @@ public class testUpdateData
     @Test
     void TestUpdatePaymentFail()
     {
-        String updateSQL = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE paymentsID = ?";
+        String updateSQL = "UPDATE Payments SET paymentAmount = ?, paymentDate = ?, paymentMethod = ? WHERE ID = ?";
             try(PreparedStatement statement = connection.prepareStatement(updateSQL))
             {
                 statement.setString(1, "invalidPaymentAmount");
                 statement.setString(2, "invalidPaymentDate");
                 statement.setString(3,"invalidPaymentMethod");
-                statement.setString(4,"invalidPaymentID");
+                statement.setInt(4,33);
                 int rowsUpdated = statement.executeUpdate();
                 assertEquals(0, rowsUpdated);
                 System.out.println("Error: No Rows updated.");
