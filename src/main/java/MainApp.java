@@ -26,6 +26,11 @@ public class MainApp {
                     InsertData.main(args);
                     break;
 
+                case 2:
+                    System.out.println("You have entered delete function");
+                    deleteData.main(args);
+                    break;
+
                 case 3:
                     System.out.println("You have entered update function");
                     UpdateData.main(args);

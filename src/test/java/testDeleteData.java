@@ -33,6 +33,8 @@ public class testDeleteData {
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException();
         }
+
+        
     }
 
 
