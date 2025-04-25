@@ -118,6 +118,26 @@ public class ReadData {
         }
         return orders;
     }
+    public List<String[]> getAllAddresses(Connection connection) throws SQLException {
+        List<String[]> addresses = new ArrayList<>();
+
+        String sql = "SELECT * FROM adress";
+        try (Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                String[] row = new String[6];
+                row[0] = rs.getString("ID");
+                row[1] = rs.getString("customerID");
+                row[2] = rs.getString("country");
+                row[3] = rs.getString("city");
+                row[4] = rs.getString("street");
+                row[5] = rs.getString("eircode");
+
+            }
+        }
+        return addresses;
+    }
 }
 
 
