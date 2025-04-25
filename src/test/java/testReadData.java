@@ -3,7 +3,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
-import java.sql.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class testReadData {
@@ -41,6 +41,32 @@ public class testReadData {
             throw new RuntimeException();
         }
     }
+    @Test
+    void testAllCustomersFail() {
+        assertThrows(SQLException.class, () -> {
+            myReadData.getAllCustomers(null);
+        }, "Expected SQLException");
+    }
 
+    @Test
+    void testAllBrandsSuccess() {
+        try {
+            List<String[]> brands = myReadData.getAllBrands(connection);
 
+            Assertions.assertNotNull(brands, "Customer data should not be null");
+            Assertions.assertTrue(brands.size() > 0, "Expected at least one customer in database");
+            for (String[] brand : brands) {
+                System.out.printf("ID: %s, Name: %s",
+                        brand[0], brand[1]);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
+    }
+    @Test
+    void testAllBrandsFail() {
+        assertThrows(SQLException.class, () -> {
+            myReadData.getAllBrands(null);
+        }, "Expected SQLException");
+    }
 }
