@@ -131,8 +131,30 @@ public class testReadData {
         assertThrows(SQLException.class, () -> {
             myReadData.getAllProducts(null);
         }, "Expected SQLException");
+    }
+    @Test
+    void testAllOrdersSuccess() {
+        try{
+            List<String[]> orders = myReadData.getAllOrders(connection);
+            assertNotNull(orders, "Order data should not be null");
+            assertTrue(orders.size() > 0, "Expected at least one order record");
+            for (String[] order : orders) {
+                System.out.printf(
+                        "Order ID: %s, Date: %s, Cost: %s, CustomerID: %s%n",
+                        order[0], order[1], order[2], order[3]
+                );
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
+    @Test
+    void testAllOrdersFail() {
+        assertThrows(SQLException.class, () -> {
+            myReadData.getAllOrders(null);
+        }, "Expected SQLException");
+    }
+}
 
 
 
