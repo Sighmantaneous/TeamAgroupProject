@@ -53,8 +53,8 @@ public class testReadData {
         try {
             List<String[]> brands = myReadData.getAllBrands(connection);
 
-            Assertions.assertNotNull(brands, "Customer data should not be null");
-            Assertions.assertTrue(brands.size() > 0, "Expected at least one customer in database");
+            Assertions.assertNotNull(brands, "brand data should not be null");
+            Assertions.assertTrue(brands.size() > 0, "Expected at least one brand in database");
             for (String[] brand : brands) {
                 System.out.printf("ID: %s, Name: %s",
                         brand[0], brand[1]);
@@ -67,6 +67,26 @@ public class testReadData {
     void testAllBrandsFail() {
         assertThrows(SQLException.class, () -> {
             myReadData.getAllBrands(null);
+        }, "Expected SQLException");
+    }
+    @Test
+    void testAllWarehousesSuccess() {
+        try{
+        List<String[]> warehouses = myReadData.getAllWarehouses(connection);
+        Assertions.assertNotNull(warehouses, "warehouse data should not be null");
+        Assertions.assertTrue(warehouses.size() > 0, "Expected at least one warehouse in database");
+        for (String[] warehouse : warehouses) {
+            System.out.printf("ID: %s, Location: %s",
+                    warehouse[0], warehouse[1]);
+        }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void testAllWarehousesFail() {
+        assertThrows(SQLException.class, () -> {
+            myReadData.getAllWarehouses(null);
         }, "Expected SQLException");
     }
 }

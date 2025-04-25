@@ -40,7 +40,24 @@ public class ReadData {
                      brands.add(row);
                  }
         }
-
+        return brands;
     }
+    public List<String[]> getAllWarehouses(Connection connection) throws SQLException {
+        List<String[]> warehouses = new ArrayList<>();
+
+        String sql = "SELECT * FROM warehouse";
+        try (Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                String[] row = new String[2];
+                row[0] = String.valueOf(rs.getInt("ID"));
+                row[1] = rs.getString("WarehouseLocation");
+
+                warehouses.add(row);
+            }
+        }
+        return warehouses;
+    }
+
 }
 
