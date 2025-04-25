@@ -26,5 +26,21 @@ public class ReadData {
 
         return customers;
     }
+    public List<String[]> getAllBrands(Connection connection) throws SQLException {
+        List<String[]> brands = new ArrayList<>();
+
+        String sql = "SELECT * FROM brand";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+                 while (rs.next()) {
+                     String[] row = new String[2];
+                     row[0] = String.valueOf(rs.getInt("ID"));
+                     row[1] = rs.getString("BrandName");
+
+                     brands.add(row);
+                 }
+        }
+
+    }
 }
 

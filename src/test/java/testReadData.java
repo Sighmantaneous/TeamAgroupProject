@@ -48,5 +48,25 @@ public class testReadData {
         }, "Expected SQLException");
     }
 
+    @Test
+    void testAllBrandsSuccess() {
+        try {
+            List<String[]> brands = myReadData.getAllBrands(connection);
 
+            Assertions.assertNotNull(brands, "Customer data should not be null");
+            Assertions.assertTrue(brands.size() > 0, "Expected at least one customer in database");
+            for (String[] brand : brands) {
+                System.out.printf("ID: %s, Name: %s",
+                        brand[0], brand[1]);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
+    }
+    @Test
+    void testAllBrandsFail() {
+        assertThrows(SQLException.class, () -> {
+            myReadData.getAllBrands(null);
+        }, "Expected SQLException");
+    }
 }
