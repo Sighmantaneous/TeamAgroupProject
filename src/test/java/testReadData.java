@@ -89,4 +89,26 @@ public class testReadData {
             myReadData.getAllWarehouses(null);
         }, "Expected SQLException");
     }
-}
+    @Test
+    void testAllCategorySuccess() {
+        try{
+            List<String[]> categories = myReadData.getAllCategory(connection);
+            Assertions.assertNotNull(categories, "category data should not be null");
+            Assertions.assertTrue(categories.size() > 0, "Expected at least one category in database");
+            for (String[] category : categories) {
+                System.out.printf("ID: %s, Name: %s",
+                        category[0], category[1]);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void testAllCategoryFail() {
+        assertThrows(SQLException.class, () -> {
+            myReadData.getAllCategory(null);
+        }, "Expected SQLException");
+    }
+    }
+
+

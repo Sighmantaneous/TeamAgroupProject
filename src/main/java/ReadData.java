@@ -58,6 +58,22 @@ public class ReadData {
         }
         return warehouses;
     }
+    public List<String[]> getAllCategory(Connection connection) throws SQLException {
+        List<String[]> category = new ArrayList<>();
 
+        String sql = "SELECT * FROM category";
+        try (Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(sql)) {
+
+        while (rs.next()) {
+            String[] row = new String[2];
+            row[0] = String.valueOf(rs.getInt("ID"));
+            row[1] = rs.getString("CategoryName");
+
+            category.add(row);
+            }
+        }
+        return category;
+    }
 }
 
