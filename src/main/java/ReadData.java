@@ -99,5 +99,25 @@ public class ReadData {
         }
         return products;
     }
+    public List<String[]> getAllOrders(Connection connection) throws SQLException {
+        List<String[]> orders = new ArrayList<>();
+
+        String sql = "SELECT * FROM order";
+        try (Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(sql)) {
+
+        while (rs.next()) {
+
+        String[] row = new String[4];
+        row[0] = String.valueOf(rs.getInt("ID"));
+        row[1] = rs.getString("OrderDate");
+        row[2] = rs.getString("OrderCost");
+        row[3] = rs.getString("CustomerID");
+
+        orders.add(row);}
+        }
+        return orders;
+    }
 }
+
 
