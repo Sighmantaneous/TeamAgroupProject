@@ -1,2 +1,30 @@
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ReadData {
+
+    public List<String[]> getAllCustomers(Connection connection) throws SQLException {
+        List<String[]> customers = new ArrayList<>();
+
+        String sql = "SELECT * FROM customer";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                String[] row = new String[5];
+                row[0] = String.valueOf(rs.getInt("ID"));
+                row[1] = rs.getString("CustomerName");
+                row[2] = rs.getString("CustomerLastName");
+                row[3] = rs.getString("CustomerEmail");
+                row[4] = rs.getString("CustomerPhone");
+
+                customers.add(row);
+            }
+        }
+
+        return customers;
+    }
 }
+
