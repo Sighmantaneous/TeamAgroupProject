@@ -109,6 +109,24 @@ public class testReadData {
             myReadData.getAllCategory(null);
         }, "Expected SQLException");
     }
+    @Test
+    void testAllProductsSuccess() {
+        try{
+            List<String[]> products = myReadData.getAllProducts(connection);
+            assertNotNull(products, "Product data should not be null");
+            assertTrue(products.size() > 0, "Expected at least one product record");
+            for (String[] product : products) {
+                System.out.printf(
+                        "Product ID: %s, Name: %s, Price: %s, Stock: %s, BrandID: %s, CategoryID: %s, WarehouseID: %s%n",
+                        product[0], product[1], product[3], product[4], product[5], product[6], product[7]
+                );
+            }
+
+        } catch (SQLException e) {
+            fail("Unexpected SQL exception: " + e.getMessage());
+        }
+        }
     }
+
 
 

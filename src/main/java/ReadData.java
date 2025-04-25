@@ -75,5 +75,29 @@ public class ReadData {
         }
         return category;
     }
+    public List<String[]> getAllProducts(Connection connection) throws SQLException {
+        List<String[]> products = new ArrayList<>();
+
+        String sql = "SELECT * FROM product";
+        try (Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(sql)) {
+
+        while (rs.next()) {
+
+        String[] row = new String[8];
+            row[0] = String.valueOf(rs.getInt("ID"));
+            row[1] = rs.getString("ProductName");
+            row[2] = rs.getString("Description");
+            row[3] = rs.getString("Price");
+            row[4] = rs.getString("ProductStock");
+            row[5] = rs.getString("BrandID");
+            row[6] = rs.getString("WarehouseID");
+            row[7] = rs.getString("CategoryID");
+
+            products.add(row);
+            }
+        }
+        return products;
+    }
 }
 
