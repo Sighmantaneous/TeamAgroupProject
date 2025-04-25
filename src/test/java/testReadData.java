@@ -53,8 +53,8 @@ public class testReadData {
         try {
             List<String[]> brands = myReadData.getAllBrands(connection);
 
-            Assertions.assertNotNull(brands, "Customer data should not be null");
-            Assertions.assertTrue(brands.size() > 0, "Expected at least one customer in database");
+            Assertions.assertNotNull(brands, "brand data should not be null");
+            Assertions.assertTrue(brands.size() > 0, "Expected at least one brand in database");
             for (String[] brand : brands) {
                 System.out.printf("ID: %s, Name: %s",
                         brand[0], brand[1]);
@@ -69,4 +69,46 @@ public class testReadData {
             myReadData.getAllBrands(null);
         }, "Expected SQLException");
     }
-}
+    @Test
+    void testAllWarehousesSuccess() {
+        try{
+        List<String[]> warehouses = myReadData.getAllWarehouses(connection);
+        Assertions.assertNotNull(warehouses, "warehouse data should not be null");
+        Assertions.assertTrue(warehouses.size() > 0, "Expected at least one warehouse in database");
+        for (String[] warehouse : warehouses) {
+            System.out.printf("ID: %s, Location: %s",
+                    warehouse[0], warehouse[1]);
+        }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void testAllWarehousesFail() {
+        assertThrows(SQLException.class, () -> {
+            myReadData.getAllWarehouses(null);
+        }, "Expected SQLException");
+    }
+    @Test
+    void testAllCategorySuccess() {
+        try{
+            List<String[]> categories = myReadData.getAllCategory(connection);
+            Assertions.assertNotNull(categories, "category data should not be null");
+            Assertions.assertTrue(categories.size() > 0, "Expected at least one category in database");
+            for (String[] category : categories) {
+                System.out.printf("ID: %s, Name: %s",
+                        category[0], category[1]);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void testAllCategoryFail() {
+        assertThrows(SQLException.class, () -> {
+            myReadData.getAllCategory(null);
+        }, "Expected SQLException");
+    }
+    }
+
+
