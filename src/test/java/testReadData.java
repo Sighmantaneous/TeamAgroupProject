@@ -3,7 +3,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
-import java.sql.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class testReadData {
@@ -40,6 +40,12 @@ public class testReadData {
         } catch (SQLException e) {
             throw new RuntimeException();
         }
+    }
+    @Test
+    void testAllCustomersFail() {
+        assertThrows(SQLException.class, () -> {
+            myReadData.getAllCustomers(null);
+        }, "Expected SQLException");
     }
 
 
