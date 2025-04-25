@@ -124,7 +124,13 @@ public class testReadData {
 
         } catch (SQLException e) {
             fail("Unexpected SQL exception: " + e.getMessage());
+            }
         }
+        @Test
+    void testAllProductsFail() {
+        assertThrows(SQLException.class, () -> {
+            myReadData.getAllProducts(null);
+        }, "Expected SQLException");
         }
     }
 
