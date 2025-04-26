@@ -118,6 +118,46 @@ public class ReadData {
         }
         return orders;
     }
+    public List<String[]> getAllAddresses(Connection connection) throws SQLException {
+        List<String[]> addresses = new ArrayList<>();
+
+        String sql = "SELECT * FROM adress";
+        try (Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                String[] row = new String[6];
+                row[0] = rs.getString("ID");
+                row[1] = rs.getString("customerID");
+                row[2] = rs.getString("country");
+                row[3] = rs.getString("city");
+                row[4] = rs.getString("street");
+                row[5] = rs.getString("eircode");
+
+            }
+        }
+        return addresses;
+    }
+    public List<String[]> getAllPayments(Connection connection) throws SQLException {
+        List<String[]> payments = new ArrayList<>();
+
+        String sql = "SELECT * FROM payment";
+        try (Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(sql)) {
+
+        while (rs.next()) {
+        String[] row = new String[5];
+        row[0] = String.valueOf(rs.getInt("ID"));
+        row[1] = rs.getString("OrderID");
+        row[2] = rs.getString("paymentAmount");
+        row[3] = rs.getString("paymentDate");
+        row[4] = rs.getString("paymentMethod");
+
+        payments.add(row);
+            }
+        }
+        return payments;
+    }
 }
 
 
