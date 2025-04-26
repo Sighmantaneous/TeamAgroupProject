@@ -183,6 +183,36 @@ public class testReadData {
             throw new RuntimeException(e);
         }
     }
+    @Test
+    void testAddressFail() {
+        assertThrows(SQLException.class, () -> {
+            myReadData.getAllAddresses(null);
+        }, "Expected SQLException");
+    }
+    @Test
+    void testPaymentsSuccess() {
+        try{
+            List<String[]> payments = myReadData.getAllPayments(connection);
+            assertNotNull(payments, "Payment data should not be null");
+            assertTrue(payments.size() > 0, "Expected at least one payment record");
+
+            for (String[] product : payments) {
+                System.out.printf(
+                        "Payment ID: %s, OrderID: %s, Amount: %s, Date: %s, Method: %s%n",
+                        product[0], product[1], product[2], product[3], product[4]
+                );
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void testPaymentsFail() {
+        assertThrows(SQLException.class, () -> {
+            myReadData.getAllProducts(null);
+        }, "Expected SQLException");
+    }
 }
 
 
