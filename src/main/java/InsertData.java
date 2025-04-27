@@ -90,7 +90,7 @@ public class InsertData {
 
         Connection connection;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -101,6 +101,9 @@ public class InsertData {
             stmt.setString(2, BrandName);
             stmt.executeUpdate();
             System.out.println("Inserted ID=" + BrandID + " Name=" + BrandName + " into Brand.");
+           } catch (SQLIntegrityConstraintViolationException e) {
+                // Handle the exception specifically for integrity constraint violations (e.g., duplicate entries)
+                System.err.println("Data already exists.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -125,7 +128,7 @@ public class InsertData {
         Connection connection;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -136,6 +139,9 @@ public class InsertData {
             stmt.setString(2, CategoryName);
             stmt.executeUpdate();
             System.out.println("Inserted ID=" + CategoryID + " Name=" + CategoryName + " into Brand.");
+        } catch (SQLIntegrityConstraintViolationException e) {
+            // Handle the exception specifically for integrity constraint violations (e.g., duplicate entries)
+            System.err.println("Data already exists.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -163,7 +169,7 @@ public class InsertData {
 
         Connection connection;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -177,6 +183,9 @@ public class InsertData {
             stmt.setString(5, PhoneNumber);
             stmt.executeUpdate();
             System.out.println("All items entered into Customer.");
+        } catch (SQLIntegrityConstraintViolationException e) {
+            // Handle the exception specifically for integrity constraint violations (e.g., duplicate entries)
+            System.err.println("Data already exists.");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -210,7 +219,7 @@ public class InsertData {
 
         Connection connection;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -225,6 +234,9 @@ public class InsertData {
             stmt.setString(5, Street);
             stmt.setString(6, Eircode);
             stmt.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            // Handle the exception specifically for integrity constraint violations (e.g., duplicate entries)
+            System.err.println("Data already exists.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -249,7 +261,7 @@ public class InsertData {
     public static void CreateOrders(int OrderID, int OrderCost, int CustomerID) {
         Connection connection;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -262,6 +274,9 @@ public class InsertData {
             stmt.setInt(3, OrderCost);
             stmt.setInt(4, CustomerID);
             stmt.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            // Handle the exception specifically for integrity constraint violations (e.g., duplicate entries)
+            System.err.println("Data already exists.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -289,7 +304,7 @@ public class InsertData {
         Connection connection;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -303,6 +318,9 @@ public class InsertData {
             stmt.setInt(3, PaymentAmount);
             stmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
             stmt.setString(5, PaymentMethod);
+        } catch (SQLIntegrityConstraintViolationException e) {
+            // Handle the exception specifically for integrity constraint violations (e.g., duplicate entries)
+            System.err.println("Data already exists.");
 
 
         } catch (SQLException e) {
@@ -329,7 +347,7 @@ public class InsertData {
         Connection connection;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -340,6 +358,9 @@ public class InsertData {
             stmt.setInt(1, WarehouseID);
             stmt.setString(2, WarehouseAddress);
             stmt.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            // Handle the exception specifically for integrity constraint violations (e.g., duplicate entries)
+            System.err.println("Data already exists.");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -379,7 +400,7 @@ public class InsertData {
         Connection connection;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -396,6 +417,9 @@ public class InsertData {
             stmt.setInt(7, ProductCategoryID);
             stmt.setInt(8,WarehouseID );
             stmt.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            // Handle the exception specifically for integrity constraint violations (e.g., duplicate entries)
+            System.err.println("Data already exists.");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

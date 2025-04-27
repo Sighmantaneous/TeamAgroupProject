@@ -9,12 +9,12 @@ public class deleteData {
         // Database details
         String jdbcURL = "jdbc:mysql://localhost/groupProjectDatabase";
         String dbUser = "root";
-        String dbPassword = "EmrePassword24.";
+        String dbPassword = "password.";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
             Scanner scanner = new Scanner(System.in);
 
             boolean exit = true;
