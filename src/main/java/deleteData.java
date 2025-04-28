@@ -6,15 +6,11 @@ import java.util.Scanner;
 
 public class deleteData {
     public static void main(String[] args) {
-        // Database details
-        String jdbcURL = "jdbc:mysql://localhost/groupProjectDatabase";
-        String dbUser = "root";
-        String dbPassword = "password.";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "EmrePassword24.");
             Scanner scanner = new Scanner(System.in);
 
             boolean exit = true;
