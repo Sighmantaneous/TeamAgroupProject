@@ -28,7 +28,7 @@ public class testDeleteData {
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            stmt.setInt(4, 20);
+            stmt.setInt(1, 8);
             stmt.executeUpdate();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException();
@@ -50,7 +50,7 @@ public class testDeleteData {
             stmt.setInt(1, 20);
             int rowsAffected = stmt.executeUpdate();
 
-            assertEquals(0, rowsAffected, "Delete should not affect any rows.");
+            assertEquals(0, rowsAffected, "Entered ID could not be found");
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException();
         }
