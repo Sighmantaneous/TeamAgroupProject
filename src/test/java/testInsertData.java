@@ -18,7 +18,7 @@ public class testInsertData {
     void TestInsertBrandSuccess() {
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
             connection.setAutoCommit(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -39,7 +39,7 @@ public class testInsertData {
     void TestInsertBrandFailure() {
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
             connection.setAutoCommit(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -68,7 +68,7 @@ public class testInsertData {
     void TestInsertCategorySuccess() {
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
             connection.setAutoCommit(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -90,7 +90,7 @@ public class testInsertData {
 
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
             connection.setAutoCommit(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -116,7 +116,7 @@ public class testInsertData {
         Connection connection = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
             connection.setAutoCommit(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -142,7 +142,7 @@ public class testInsertData {
 
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
             connection.setAutoCommit(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -180,7 +180,7 @@ public class testInsertData {
         Connection connection = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
             connection.setAutoCommit(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -207,7 +207,7 @@ public class testInsertData {
     void TestInsertAddressFailure() {
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
             connection.setAutoCommit(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -246,7 +246,7 @@ public class testInsertData {
     void TestInsertOrdersSuccess() {
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
             connection.setAutoCommit(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -273,7 +273,7 @@ public class testInsertData {
 
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
             connection.setAutoCommit(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -307,7 +307,7 @@ public class testInsertData {
     void TestInsertPaymentsSuccess() {
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
             connection.setAutoCommit(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -334,7 +334,7 @@ public class testInsertData {
         Connection connection = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
             connection.setAutoCommit(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -374,7 +374,7 @@ void TestInsertWarehouseSuccess() {
         Connection connection = null;
 
     try {
-        connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
         connection.setAutoCommit(false);
     } catch (SQLException e) {
         throw new RuntimeException(e);
@@ -397,7 +397,7 @@ void TestInsertWarehouseSuccess() {
     void TestInsertWarehouseFailure() {
         Connection connection = null;
     try {
-        connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
         connection.setAutoCommit(false);
     } catch (SQLException e) {
         throw new RuntimeException(e);
@@ -429,7 +429,7 @@ void TestInsertWarehouseSuccess() {
 void TestInsertProductSuccess() {
         Connection connection = null;
     try {
-        connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
         connection.setAutoCommit(false);
     } catch (SQLException e) {
         throw new RuntimeException(e);
@@ -456,7 +456,7 @@ void TestInsertProductSuccess() {
 void TestInsertProductFailure() {
         Connection connection = null;
     try {
-        connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "simon", "password");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/groupProjectDatabase", "root", "password");
         connection.setAutoCommit(false);
     } catch (SQLException e) {
         throw new RuntimeException(e);
