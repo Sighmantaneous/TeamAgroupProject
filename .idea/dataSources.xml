@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@localhost" uuid="62efb6ca-f943-4edf-8f0d-1acad45e008e">
+    <data-source source="LOCAL" name="groupProjectDatabase@localhost" uuid="50e56544-f206-4980-bb0d-c9a7b3d76b48">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
-      <jdbc-additional-properties>
-        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
-        <property name="com.intellij.clouds.kubernetes.db.resource.type" value="Deployment" />
-      </jdbc-additional-properties>
+      <jdbc-url>jdbc:mysql://localhost:3306/groupProjectDatabase</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
