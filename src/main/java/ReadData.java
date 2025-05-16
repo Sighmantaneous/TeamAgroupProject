@@ -5,6 +5,10 @@ import java.util.List;
 
 public class ReadData {
 
+    public static void main(String[] args) {
+
+    }
+
     public List<String[]> getAllCustomers(Connection connection) throws SQLException {
         List<String[]> customers = new ArrayList<>();
 

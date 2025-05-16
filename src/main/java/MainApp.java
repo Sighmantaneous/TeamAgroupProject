@@ -15,8 +15,9 @@ public class MainApp {
             System.out.println("1. Create Items");
             System.out.println("2. Delete Items");
             System.out.println("3. Update Items");
-            System.out.println("4. Search Items");
-            System.out.println("5. Exit");
+            System.out.println("4. Read Items");
+            System.out.println("5. Search Items");
+            System.out.println("6. Exit");
 
             int CRUDselect = scanner.nextInt();
             switch (CRUDselect) {
@@ -35,8 +36,10 @@ public class MainApp {
                     System.out.println("You have entered update function");
                     UpdateData.main(args);
                     break;
-
-                case 5:
+                case 4:
+                    System.out.println("You have entered read function");
+                    ReadData.main(args);
+                case 6:
                     exit = false;
                     System.out.println("Good-Bye");
                     break;
